@@ -1,6 +1,6 @@
 import React from "react";
 
-function Signin() {
+function SignIn() {
   function submit () {
     console.log("Submit");
   }
@@ -13,4 +13,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;
