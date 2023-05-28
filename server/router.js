@@ -12,10 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 const index = require("./routes/index");
 app.use("/", index);
 
-app.get("/*", (req, res) => {
+
+app.use((req, res) => {
   res.status(404);
   res.json({
-    msg: "Page not found",
+    err: "Page not found",
   });
 });
 
