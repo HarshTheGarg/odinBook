@@ -1,31 +1,46 @@
-const cors = require("cors");
+// Require express and make app
 const express = require("express");
-require("dotenv").config();
-const passport = require('passport');
-require("./config/passport/jwt")(passport);
-
 const app = express();
 
+// Passport to authenticate the users
+const passport = require('passport');
+
+// Passport Strategies
+// use the passport jwt strategy
+require("./config/passport/jwt");
+
+// Connect to the DB
+require("./config/mongoConnection");
+
+// Code only to be run in development environment
 if (process.env.NODE_ENV == "development") {
+  // To use the .env variables
+  require("dotenv").config();
+
+  // Better console output
   const morgan = require("morgan");
   app.use(morgan("dev"));
 }
 
+// Initialize the passport
 app.use(passport.initialize());
 
-
+// To process the incoming data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Allow cross-origin-resource-sharing
+const cors = require("cors");
 app.use(
   cors({
     origin: "http://localhost:5000",
   })
 );
 
-const index = require("./routes/index");
-app.use("/", index);
+// All the routes handled by auth/index.js
+app.use("/", require("./routes/index"));
 
+// Handle page not found error
 app.use((req, res) => {
   res.status(404);
   res.json({
@@ -33,6 +48,7 @@ app.use((req, res) => {
   });
 });
 
+// if any function calls next(err) etc
 app.use((err, req, res) => {
   console.log("Some Error: Error Handler Called");
   const status = err.statusCode || 500;
@@ -45,8 +61,11 @@ app.use((err, req, res) => {
   })
 })
 
+
+// Set port to listen on using the env variables if available or else standard port
 const port = process.env.PORT || 3000;
 
+// Listen from the port
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
