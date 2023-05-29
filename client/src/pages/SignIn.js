@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 function SignIn() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("harsh@example.com"); //TODO remove the default
+  const [password, setPassword] = useState("password"); //TODO remove the default
 
   function submitLogin(e) {
     e.preventDefault();
@@ -17,7 +17,7 @@ function SignIn() {
       password,
     };
 
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("http://localhost:3000/auth/local/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -51,7 +51,7 @@ function SignIn() {
       password,
     };
 
-    const response = await fetch("http://localhost:3000/register", {
+    const response = await fetch("http://localhost:3000/auth/local/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -89,8 +89,6 @@ function SignIn() {
     });
 
     console.log(response.status);
-    // const result = await response.json();
-    // console.log(result);
   };
 
   return (
@@ -102,6 +100,7 @@ function SignIn() {
           name="email"
           id="loginEmail"
           placeholder="email"
+          value="harsh@example.com"
           onChange={emailUpdate}
         />
         <input
@@ -109,6 +108,7 @@ function SignIn() {
           name="password"
           id="loginPassword"
           placeholder="password"
+          value="password"
           onChange={passUpdate}
         />
         <button onClick={submitLogin}>Submit</button>
