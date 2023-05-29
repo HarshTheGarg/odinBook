@@ -5,8 +5,7 @@ require("dotenv").config();
 const morgan = require("morgan");
 app.use(morgan("dev"));
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const index = require("./routes/index");
