@@ -5,10 +5,8 @@ const router = express.Router();
 // Passport to authenticate the user
 const passport = require("passport");
 
-// Home route, responds with sample text
-router.get("/", (req, res) => {
-  res.json({ msg: "Hello" });
-});
+// TODO Enable while deploying
+// router.use(express.static(path.join(__dirname, "../../client/dist/")));
 
 // Route to authenticate the users
 router.use("/auth", require("./auth/auth"));
@@ -27,4 +25,13 @@ router.get(
   }
 );
 
+// TODO Enable while deploying
+/* router.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/dist/index.html"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+ */
 module.exports = router;

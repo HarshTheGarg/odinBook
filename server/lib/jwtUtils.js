@@ -14,7 +14,7 @@ const issueJWT = (user) => {
   const id = user._id;
 
   // Set JWT expiry
-  const expiresIn = "1d";
+  const expiresIn = "1 days";
 
   // Create the payload
   const payload = {
