@@ -2,12 +2,14 @@
 const express = require("express");
 const router = express.Router();
 
+
 // Passport to authenticate the user
 const passport = require("passport");
 
 // TODO Enable while deploying
-// router.use(express.static(path.join(__dirname, "../../client/dist/")));
-
+/* const path = require("path")
+router.use(express.static(path.join(__dirname, "../../client/dist/")));
+ */
 // Route to authenticate the users
 router.use("/auth", require("./auth/auth"));
 
@@ -32,6 +34,6 @@ router.get(
       res.status(500).send(err);
     }
   });
-});
- */
+}); */
+
 module.exports = router;

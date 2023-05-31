@@ -8,6 +8,7 @@ const passport = require('passport');
 // Passport Strategies
 // use the passport jwt strategy
 require("./config/passport/jwt");
+require("./config/passport/google");
 
 // Connect to the DB
 require("./config/mongoConnection");

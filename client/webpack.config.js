@@ -10,6 +10,7 @@ module.exports = {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    publicPath: "/"
   },
 
   plugins: [

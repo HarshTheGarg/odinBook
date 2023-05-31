@@ -17,7 +17,16 @@ function NavBar() {
     navigate("/signIn");
   };
 
-  const protectedRoute = () => {
+  const protectedRoute = async () => {
+    
+    // const result = await fetch("http://localhost:3000/protected", {
+    //   headers: {
+    //     "Authorization": localStorage.getItem("token"),
+    //     "content-type" : "application/json"
+    //   }
+    // });
+    // console.log(result.status);
+
     navigate("/protect");
   };
 
