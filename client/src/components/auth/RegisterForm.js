@@ -84,4 +84,4 @@ RegisterForm.propTypes = {
   submitRegister: PropTypes.func,
 };
 
-export default RegisterForm;
+export default React.memo(RegisterForm);

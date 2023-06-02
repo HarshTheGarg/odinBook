@@ -18,12 +18,11 @@ router.get("/test", (req, res) => {
   res.json({ msg: "I am a test" });
 });
 
-// Test route to be deleted
 router.get(
   "/protected",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.json({ success: true, username: req.user.username });
+    res.json({ success: true, user: req.user });
   }
 );
 

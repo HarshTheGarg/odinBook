@@ -30,4 +30,4 @@ function GoogleLogin() {
   );
 }
 
-export default GoogleLogin;
+export default React.memo(GoogleLogin);

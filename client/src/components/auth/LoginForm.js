@@ -76,4 +76,4 @@ LoginForm.propTypes = {
   submitLogin: PropTypes.func,
 };
 
-export default LoginForm;
+export default React.memo(LoginForm);

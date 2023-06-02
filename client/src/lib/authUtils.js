@@ -25,6 +25,7 @@ const getExpiration = () => {
 
 const isLoggedIn = () => {
   if (localStorage.getItem("token") && moment().isBefore(getExpiration())) {
+    // TODO check the token from the backend too
     return true;
   } else {
     removeTokenFromLocalStorage();
