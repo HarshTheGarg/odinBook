@@ -16,7 +16,7 @@ const strategy = new GoogleStrategy(
     User.findOne({ email: profile._json.email })
       .then((user) => {
         if (user) {
-          console.log(user);
+          // console.log(user);
           done(null, user);
         } else {
 

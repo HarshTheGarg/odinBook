@@ -30,6 +30,10 @@ function NavBar() {
     navigate("/protect");
   };
 
+  const homeRoute = () => {
+    navigate("/");
+  }
+
   return (
     <>
       <div>NavBar</div>
@@ -42,6 +46,7 @@ function NavBar() {
       </div>
 
       <button onClick={protectedRoute}>Protected</button>
+      <button onClick={homeRoute}>Home</button>
       <br />
     </>
   );
