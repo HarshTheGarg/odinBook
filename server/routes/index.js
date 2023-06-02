@@ -26,6 +26,10 @@ router.get(
   }
 );
 
+router.get("/userData", passport.authenticate("jwt", {session: false}), (req, res) => {
+  res.json({success: true, user: req.user});
+})
+
 // TODO Enable while deploying
 /* router.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../client/dist/index.html"), (err) => {

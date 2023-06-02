@@ -2,7 +2,7 @@ import React from "react";
 import { logout } from "../lib/authUtils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogStatus } from "../redux/";
+import { userLogout } from "../redux/";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function NavBar() {
   const submitLogout = () => {
     logout();
     
-    dispatch(setLogStatus(false));
+    dispatch(userLogout(false));
 
     navigate("/");
   };
@@ -29,6 +29,8 @@ function NavBar() {
   const homeRoute = () => {
     navigate("/");
   };
+
+
 
   return (
     <>
