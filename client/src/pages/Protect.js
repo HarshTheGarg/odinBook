@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
-import { isLoggedIn } from "../lib/authUtils";
+import {useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Protect() {
-  if (isLoggedIn()) {
+
+  const state = useSelector(state => state);
+
+  if (state.isLoggedIn) {
     return <div>Protect</div>;
   } else {
     const navigate = useNavigate();

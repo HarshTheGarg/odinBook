@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import { isLoggedIn, logout } from "../lib/authUtils";
+import React from "react";
+import { logout } from "../lib/authUtils";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogStatus } from "../redux/";
 
 function NavBar() {
-  const [logStatus, setLogStatus] = useState(isLoggedIn());
   const navigate = useNavigate();
 
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const submitLogout = () => {
-    setLogStatus(!logStatus);
     logout();
-    window.location.reload();
+    
+    dispatch(setLogStatus(false));
+
     navigate("/");
   };
 
@@ -18,27 +23,18 @@ function NavBar() {
   };
 
   const protectedRoute = async () => {
-    
-    // const result = await fetch("http://localhost:3000/protected", {
-    //   headers: {
-    //     "Authorization": localStorage.getItem("token"),
-    //     "content-type" : "application/json"
-    //   }
-    // });
-    // console.log(result.status);
-
     navigate("/protect");
   };
 
   const homeRoute = () => {
     navigate("/");
-  }
+  };
 
   return (
     <>
       <div>NavBar</div>
       <div>
-        {logStatus ? (
+        {state.isLoggedIn ? (
           <button onClick={submitLogout}>Logout</button>
         ) : (
           <button onClick={submitSingIn}>Sing in</button>

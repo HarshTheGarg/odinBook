@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { setTokenInLocalStorage } from "../../lib/authUtils";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogStatus } from "../../redux/";
 
 function LoginForm() {
   const [email, setEmail] = useState("harsh@example.com"); //TODO remove the default
   const [password, setPassword] = useState("password"); //TODO remove the default
+  
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   function submitLogin(e) {
     e.preventDefault();
@@ -29,10 +33,12 @@ function LoginForm() {
 
     if (response.status === 200) {
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       setTokenInLocalStorage(result.token, result.expires);
+      
+      dispatch(setLogStatus(true));
     }
-    window.location.reload();
+    // window.location.reload();
     navigate("/");
   };
 
@@ -69,11 +75,5 @@ function LoginForm() {
     </>
   );
 }
-
-LoginForm.propTypes = {
-  emailUpdate: PropTypes.func,
-  passUpdate: PropTypes.func,
-  submitLogin: PropTypes.func,
-};
 
 export default React.memo(LoginForm);

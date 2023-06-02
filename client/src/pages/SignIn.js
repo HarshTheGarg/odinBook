@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../lib/authUtils";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 import LoginForm from "../components/auth/LoginForm";
 import RegisterForm from "../components/auth/RegisterForm";
 import GoogleLogin from "../components/auth/GoogleLogin";
+import { useSelector } from "react-redux";
 
 function SignIn() {
-  const navigate = useNavigate();
 
+  const state = useSelector((state) => state);
 
-  if ( !isLoggedIn()) {
-
+  if (!state.isLoggedIn) {
     return (
       <>
         <LoginForm />
@@ -22,9 +21,7 @@ function SignIn() {
       </>
     );
   } else {
-    useEffect(() => {
-      navigate("/");
-    }, []);
+    return <Navigate to={"/"} />;
   }
 }
 

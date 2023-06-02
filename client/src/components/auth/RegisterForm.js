@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+
 import { setTokenInLocalStorage } from "../../lib/authUtils";
+import { setLogStatus } from "../../redux/";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("harsh@example.com"); //TODO remove the default
-  const [password, setPassword] = useState("password"); //TODO remove the default
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
 
   const submitRegister = (e) => {
     e.preventDefault();
@@ -31,6 +35,8 @@ function RegisterForm() {
       const result = await response.json();
       // console.log(result);
       setTokenInLocalStorage(result.token);
+
+      dispatch(setLogStatus(true));
     }
   };
 
@@ -76,12 +82,5 @@ function RegisterForm() {
     </>
   );
 }
-
-RegisterForm.propTypes = {
-  nameUpdate: PropTypes.func,
-  emailUpdate: PropTypes.func,
-  passUpdate: PropTypes.func,
-  submitRegister: PropTypes.func,
-};
 
 export default React.memo(RegisterForm);
