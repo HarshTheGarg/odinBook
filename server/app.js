@@ -9,6 +9,7 @@ const passport = require('passport');
 // use the passport jwt strategy
 require("./config/passport/jwt");
 require("./config/passport/google");
+require("./config/passport/github");
 
 // Connect to the DB
 require("./config/mongoConnection");
