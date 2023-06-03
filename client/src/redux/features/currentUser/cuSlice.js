@@ -68,6 +68,7 @@ const cuSlice = createSlice({
       state.user = action.payload.user;
     });
     builder.addCase(fetchUser.rejected, (state, action) => {
+      logout();
       state.isLoading = false;
       state.user = {};
       state.isLoggedIn = false;
@@ -78,4 +79,3 @@ const cuSlice = createSlice({
 
 export default cuSlice.reducer;
 export const { removeUser } = cuSlice.actions;
-// export cuSlice.actions;

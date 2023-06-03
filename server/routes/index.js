@@ -17,6 +17,8 @@ router.get("/test", (req, res) => {
   res.json({ msg: "I am a test" });
 });
 
+
+// TODO remove while deploying
 router.get(
   "/protected",
   passport.authenticate("jwt", { session: false }),
