@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 
-
 // Passport to authenticate the user
 const passport = require("passport");
 
@@ -26,9 +25,13 @@ router.get(
   }
 );
 
-router.get("/userData", passport.authenticate("jwt", {session: false}), (req, res) => {
-  res.json({success: true, user: req.user});
-})
+router.get(
+  "/userData",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({ success: true, user: req.user });
+  }
+);
 
 // TODO Enable while deploying
 /* router.use("*", (req, res) => {

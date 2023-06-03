@@ -12,7 +12,7 @@ function NavBar() {
 
   const submitLogout = () => {
     logout();
-    
+
     dispatch(removeUser());
 
     navigate("/");
@@ -29,8 +29,6 @@ function NavBar() {
   const homeRoute = () => {
     navigate("/");
   };
-
-
 
   return (
     <>

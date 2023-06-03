@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUser } from "../../redux/features/currentUser/cuSlice";
 
 function LoginForm() {
@@ -10,7 +10,6 @@ function LoginForm() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.cu);
 
   function submitLogin(e) {
     e.preventDefault();
@@ -23,24 +22,8 @@ function LoginForm() {
       password,
     };
 
-    /* const response = await fetch("http://localhost:3000/auth/local/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.status === 200) {
-      const result = await response.json();
-      // console.log(result);
-      setTokenInLocalStorage(result.token, result.expires);
-      
-      dispatch(setLogStatus(true));
-    } */
-
     dispatch(fetchUser(data));
-    // window.location.reload();
+
     navigate("/");
   };
 
@@ -52,36 +35,30 @@ function LoginForm() {
     setPassword(e.target.value);
   };
 
-  // return (
-  if (state.isLoading) {
-    console.log("Loading");
-    return <h3> Loading </h3>;
-  } else {
-    return (
-      <>
-        <form action="">
-          login:
-          <input
-            type="email"
-            name="email"
-            id="loginEmail"
-            placeholder="email"
-            value="harsh@example.com"
-            onChange={emailUpdate}
-          />
-          <input
-            type="password"
-            name="password"
-            id="loginPassword"
-            placeholder="password"
-            value="password"
-            onChange={passUpdate}
-          />
-          <button onClick={submitLogin}>Submit</button>
-        </form>
-      </>
-    );
-  }
+  return (
+    <>
+      <form action="">
+        login:
+        <input
+          type="email"
+          name="email"
+          id="loginEmail"
+          placeholder="email"
+          value="harsh@example.com"
+          onChange={emailUpdate}
+        />
+        <input
+          type="password"
+          name="password"
+          id="loginPassword"
+          placeholder="password"
+          value="password"
+          onChange={passUpdate}
+        />
+        <button onClick={submitLogin}>Submit</button>
+      </form>
+    </>
+  );
 
   // );
 }

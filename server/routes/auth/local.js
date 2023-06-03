@@ -40,7 +40,7 @@ router.post("/login", (req, res, next) => {
       }
     })
 
-    // Error in runncing the query
+    // Error in running the query
     .catch((err) => {
       next(err);
     });

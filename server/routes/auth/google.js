@@ -19,12 +19,11 @@ router.get(
     failureRedirect: "failure",
   }),
   (req, res) => {
-    // console.log(req.user);
     if (req.user) {
-
-      const {token, expires} = issueJWT(req.user);
-      res.redirect(`http://localhost:5000/OAuthRedirect/?token=${token}&expires=${expires}`)
-      // res.status(200).json({ success: true });
+      const { token, expires } = issueJWT(req.user);
+      res.redirect(
+        `http://localhost:5000/OAuthRedirect/?token=${token}&expires=${expires}`
+      );
     } else {
       res.status(500).json({ success: false });
     }

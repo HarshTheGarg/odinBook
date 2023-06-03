@@ -18,6 +18,6 @@ main().catch((err) => {
 });
 
 // Log on successful connection
-mongoose.connection.on('connected', () => {
+mongoose.connection.on("connected", () => {
   console.log("Database Connected");
-})
+});

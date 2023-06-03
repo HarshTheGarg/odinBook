@@ -54,23 +54,6 @@ const cuSlice = createSlice({
       logout();
       return initialState;
     },
-    // fetchUserRequest: (state) => {
-    //   state.isLoading = true;
-    //   state.isLoggedIn = false;
-    //   state.error = "";
-    //   state.user = {};
-    // },
-    // fetchUserSuccess: (state, action) => {
-    //   state.isLoading = false;
-    //   state.isLoggedIn = true;
-    //   state.user = action.payload;
-    // },
-    // fetchUserFailure: (state, action) => {
-    //   state.isLoading = false;
-    //   state.user = {};
-    //   state.isLoggedIn = false;
-    //   state.error = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {

@@ -6,7 +6,6 @@ import GoogleLogin from "../components/auth/GoogleLogin";
 import { useSelector } from "react-redux";
 
 function SignIn() {
-
   const state = useSelector((state) => state.cu);
 
   if (!state.isLoggedIn) {

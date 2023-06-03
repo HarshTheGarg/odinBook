@@ -10,9 +10,9 @@ import Protect from "./pages/Protect";
 import OAuthRedirect from "./pages/OAuthRedirect";
 import { tokenExists } from "./lib/authUtils";
 import { fetchUser } from "./redux/features/currentUser/cuSlice";
+import { Loader } from "./pages/Loader";
 
 function App() {
-
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cu);
 
@@ -23,21 +23,21 @@ function App() {
   }, []);
 
   return (
-      <BrowserRouter>
-        <NavBar />
-        <br />
-        <br />
-        <Routes>
+    <BrowserRouter>
+      <Loader />
+      <NavBar />
+      <br />
+      <br />
+      <Routes>
+        <Route path="/" exact element={<Home />} />
 
-          <Route path="/" exact element={<Home />} />
+        <Route path="/signIn" exact element={<SignIn />} />
 
-          <Route path="/signIn" exact element={<SignIn />} />
+        <Route path="/protect" exact element={<Protect />} />
 
-          <Route path="/protect" exact element={<Protect />} />
-
-          <Route path="/OAuthRedirect" exact element={<OAuthRedirect />} />
-        </Routes>
-      </BrowserRouter>
+        <Route path="/OAuthRedirect" exact element={<OAuthRedirect />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

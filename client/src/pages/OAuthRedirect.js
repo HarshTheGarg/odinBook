@@ -3,7 +3,6 @@ import { Navigate, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { setTokenInLocalStorage } from "../lib/authUtils";
-// import { fetchLoggedInUser } from "../redux/";
 import { fetchUser } from "../redux/features/currentUser/cuSlice";
 
 function OAuthRedirect() {

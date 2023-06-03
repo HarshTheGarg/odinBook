@@ -12,20 +12,19 @@ const strategy = new GoogleStrategy(
     callbackURL: "http://localhost:3000/auth/google/callback",
   },
   function (accessToken, refreshToken, profile, done) {
-
     User.findOne({ email: profile._json.email })
       .then((user) => {
         if (user) {
           // console.log(user);
           done(null, user);
         } else {
-
           const newUser = new User({
             username: profile.displayName,
             email: profile._json.email,
           });
 
-          newUser.save()
+          newUser
+            .save()
             .then((user) => {
               done(null, user);
             })
