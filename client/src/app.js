@@ -9,16 +9,16 @@ import Home from "./pages/Home";
 import Protect from "./pages/Protect";
 import OAuthRedirect from "./pages/OAuthRedirect";
 import { tokenExists } from "./lib/authUtils";
-import { fetchLoggedInUser } from "./redux";
+import { fetchUser } from "./redux/features/currentUser/cuSlice";
 
 function App() {
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.cu);
 
   useEffect(() => {
-    if (tokenExists() && ((typeof state == "undefined") || !state.isLoggedIn)) {
-      dispatch(fetchLoggedInUser());
+    if (tokenExists() && (!state || !state.isLoggedIn)) {
+      dispatch(fetchUser());
     }
   }, []);
 

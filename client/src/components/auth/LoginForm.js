@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLoginUser } from "../../redux/";
+import { fetchUser } from "../../redux/features/currentUser/cuSlice";
 
 function LoginForm() {
   const [email, setEmail] = useState("harsh@example.com"); //TODO remove the default
@@ -10,7 +10,7 @@ function LoginForm() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.cu);
 
   function submitLogin(e) {
     e.preventDefault();
@@ -39,7 +39,7 @@ function LoginForm() {
       dispatch(setLogStatus(true));
     } */
 
-    dispatch(fetchLoginUser(data));
+    dispatch(fetchUser(data));
     // window.location.reload();
     navigate("/");
   };

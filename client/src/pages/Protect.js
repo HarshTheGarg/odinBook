@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 function Protect() {
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.cu);
   
   if (state.isLoggedIn) {
     return <div>Protect {state.user.username}</div>;

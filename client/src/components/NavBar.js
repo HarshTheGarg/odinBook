@@ -2,18 +2,18 @@ import React from "react";
 import { logout } from "../lib/authUtils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../redux/";
+import { removeUser } from "../redux/features/currentUser/cuSlice";
 
 function NavBar() {
   const navigate = useNavigate();
 
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.cu);
   const dispatch = useDispatch();
 
   const submitLogout = () => {
     logout();
     
-    dispatch(userLogout(false));
+    dispatch(removeUser());
 
     navigate("/");
   };
