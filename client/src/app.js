@@ -12,6 +12,8 @@ import { tokenExists } from "./lib/authUtils";
 import { fetchUser } from "./redux/features/currentUser/cuSlice";
 import { Loader } from "./pages/Loader";
 
+import "./app.sass";
+
 function App() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cu);

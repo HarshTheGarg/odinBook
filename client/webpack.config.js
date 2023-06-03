@@ -5,12 +5,12 @@ module.exports = {
   entry: {
     index: "./src/index.js",
   },
-  
+
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    publicPath: "/"
+    publicPath: "/",
   },
 
   plugins: [
@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     static: "./dist",
     port: 5000,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
 
   module: {
@@ -31,9 +31,13 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        }
-      }
-    ]
-  }
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+    ],
+  },
 };
