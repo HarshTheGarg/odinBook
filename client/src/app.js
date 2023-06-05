@@ -12,7 +12,7 @@ import { tokenExists } from "./lib/authUtils";
 import { fetchUser } from "./redux/features/currentUser/cuSlice";
 import { Loader } from "./pages/Loader";
 
-import "./app.sass";
+import "./sass/main.sass";
 
 function App() {
   const dispatch = useDispatch();
