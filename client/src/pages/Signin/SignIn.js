@@ -2,9 +2,8 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import LoginForm from "../components/auth/LoginForm";
-import GoogleLogin from "../components/auth/GoogleLogin";
-import GitHubLogin from "../components/auth/GitHubLogin";
+import LoginForm from "../../components/auth/LoginForm/LoginForm";
+
 
 function SignIn() {
   const state = useSelector((state) => state.cu);
@@ -12,11 +11,9 @@ function SignIn() {
   if (!state.isLoggedIn) {
     return (
       <>
-        <LoginForm />
-
-        <GoogleLogin />
-
-        <GitHubLogin />
+        <div className="signIn">
+          <LoginForm />
+        </div>
       </>
     );
   } else {

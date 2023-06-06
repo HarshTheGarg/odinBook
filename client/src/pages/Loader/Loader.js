@@ -5,6 +5,10 @@ export const Loader = () => {
   const state = useSelector((state) => state.cu);
 
   if (state.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading">
+        <div className="loader">Loading...</div>
+      </div>
+    );
   }
 };

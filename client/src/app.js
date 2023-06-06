@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import SignIn from "./pages/SignIn";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import NavBar from "./components/NavBar";
-import Home from "./pages/Home";
+import NavBar from "./components/Navbar/NavBar";
+import Home from "./pages/Home/Home";
 import Protect from "./pages/Protect";
+import SignIn from "./pages/Signin/SignIn";
 import OAuthRedirect from "./pages/OAuthRedirect";
+
 import { tokenExists } from "./lib/authUtils";
 import { fetchUser } from "./redux/features/currentUser/cuSlice";
-import { Loader } from "./pages/Loader";
+import { Loader } from "./pages/Loader/Loader";
 
 import "./sass/main.sass";
 

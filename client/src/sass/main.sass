@@ -1,7 +1,10 @@
 @use "base/reset"
 
-$col: red
-$col2: $col
+@use "components/buttons"
 
-body 
-  color: $col2
+@use "../components/Navbar/navbar"
+@use "../components/auth/LoginForm/loginform"
+
+@use "../pages/Home/home"
+@use "../pages/Signin/signin"
+@use "../pages/Loader/loader"
