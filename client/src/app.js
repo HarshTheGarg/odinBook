@@ -36,6 +36,10 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
 
+        <Route path="/home" exact element={<Home />} />
+
+        <Route path="/findFriends" exact element={<Home />} />
+
         <Route path="/signIn" exact element={<SignIn />} />
 
         <Route path="/protect" exact element={<Protect />} />

@@ -5,6 +5,7 @@ import {
   endLoading,
   startLoading,
 } from "../../redux/features/loader/loaderSlice";
+import ListUser from "./Users/ListUser";
 
 function UsersList() {
   const [users, setUsers] = useState([]);
@@ -47,7 +48,7 @@ function UsersList() {
           {users &&
             users.length > 0 &&
             users.map((user) => {
-              return <li key={user._id}>{user.username}</li>;
+              return <ListUser key={user._id} user={user} />;
             })}
         </ul>
       </div>
