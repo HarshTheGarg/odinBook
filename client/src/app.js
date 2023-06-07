@@ -29,8 +29,6 @@ function App() {
     <BrowserRouter>
       <Loader />
       <NavBar />
-      <br />
-      <br />
       <Routes>
         <Route path="/" exact element={<Home />} />
 
