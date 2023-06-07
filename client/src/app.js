@@ -14,6 +14,7 @@ import { fetchUser } from "./redux/features/currentUser/cuSlice";
 import { Loader } from "./pages/Loader/Loader";
 
 import "./sass/main.sass";
+import { endLoading, startLoading } from "./redux/features/loader/loaderSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +22,10 @@ function App() {
 
   useEffect(() => {
     if (tokenExists() && (!state || !state.isLoggedIn)) {
+
+      dispatch(startLoading());
       dispatch(fetchUser());
+      dispatch(endLoading());
     }
   }, []);
 

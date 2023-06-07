@@ -27,6 +27,9 @@ router.get(
   }
 );
 
+router.use("/user", require("./user"))
+
+/* 
 router.get(
   "/userData",
   passport.authenticate("jwt", { session: false }),
@@ -34,6 +37,7 @@ router.get(
     res.json({ success: true, user: req.user });
   }
 );
+ */
 
 // TODO Enable while deploying
 /* router.use("*", (req, res) => {

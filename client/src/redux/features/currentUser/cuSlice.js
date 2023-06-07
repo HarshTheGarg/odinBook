@@ -3,7 +3,6 @@ import { logout, setTokenInLocalStorage } from "../../../lib/authUtils";
 
 const initialState = {
   isLoggedIn: false,
-  isLoading: false,
   user: {},
   error: "",
 };
@@ -28,7 +27,7 @@ export const fetchUser = createAsyncThunk("cu/fetchUser", (data) => {
         return result;
       });
   } else {
-    return fetch("http://localhost:3000/userData", {
+    return fetch("http://localhost:3000/user/data", {
       headers: {
         Authorization: localStorage.getItem("token"),
         "content-type": "application/json",
@@ -57,19 +56,16 @@ const cuSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {
-      state.isLoading = true;
       state.isLoggedIn = false;
       state.error = "";
       state.user = {};
     });
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.isLoading = false;
       state.isLoggedIn = true;
       state.user = action.payload.user;
     });
     builder.addCase(fetchUser.rejected, (state, action) => {
       logout();
-      state.isLoading = false;
       state.user = {};
       state.isLoggedIn = false;
       state.error = action.error.message;

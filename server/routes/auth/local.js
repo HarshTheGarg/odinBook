@@ -32,7 +32,11 @@ router.post("/login", (req, res, next) => {
       if (isValid) {
         // Issue the JWT and respond to the client
         const { token, expires } = issueJWT(user);
-        res.json({ success: true, token, expires, user });
+        const userDet = {
+          username: user.username,
+          email: user.email,
+        };
+        res.json({ success: true, token, expires, userDet });
       }
       // Incorrect password
       else {
@@ -65,7 +69,11 @@ router.post("/register", (req, res, next) => {
     .then((user) => {
       // Issue the JWT and respond to the client
       const { token, expires } = issueJWT(user);
-      res.json({ success: true, user, token, expires });
+      const userDet = {
+        username: user.username,
+        email: user.email,
+      };
+      res.json({ success: true, token, expires, userDet });
     })
 
     // Error in saving the user in DB
