@@ -1,10 +1,14 @@
-import React, { useEffect } from "react";
-import UsersList from "../../UsersList/UsersList";
+import React, { useEffect, useState } from "react";
+// import UsersList from "../../UsersList/UsersList";
 import { useDispatch } from "react-redux";
 import { endLoading } from "../../../redux/features/loader/loaderSlice";
+import ListUser from "./ListUser/ListUser";
 
 function Find() {
   const dispatch = useDispatch();
+
+  const [usersList, setUsersList] = useState([]);
+  const [requestedFriends, setRequestedFriends] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/user/friends/find", {
@@ -20,8 +24,10 @@ function Find() {
       })
       .then((result) => {
         if (result.success) {
-          console.log(result.usersList);
-          console.log(result.friendsRequested);
+          setUsersList(result.usersList);
+          setRequestedFriends(result.friendsRequested);
+          // console.log(result.usersList);
+          // console.log(result.friendsRequested);
         }
       })
       .catch((err) => {
@@ -33,7 +39,25 @@ function Find() {
   return (
     <>
       Find Friends
-      {/* <UsersList /> */}
+      <ul>
+        {usersList &&
+          usersList.length > 0 &&
+          usersList.map((user) => {
+            if (requestedFriends.includes(user._id)) {
+              return (
+                <li key={user._id}>
+                  <ListUser type="requested" user={user} />
+                </li>
+              );
+            }else{
+              return (
+                <li key={user._id}>
+                  <ListUser user={user}/>
+                </li>
+              );
+            }
+          })}
+      </ul>
     </>
   );
 }
