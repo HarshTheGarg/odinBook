@@ -14,6 +14,7 @@ import { fetchUser } from "./redux/features/currentUser/cuSlice";
 import { Loader } from "./pages/Loader/Loader";
 
 import "./sass/main.sass";
+import Find from "./components/Friends/Find/Find";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +22,6 @@ function App() {
 
   useEffect(() => {
     if (tokenExists() && (!state || !state.isLoggedIn)) {
-
       dispatch(fetchUser());
     }
   }, []);
@@ -33,10 +33,9 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
 
-        <Route path="/home" exact element={<Home />} />
-
-        <Route path="/findFriends" exact element={<Home />} />
-
+        <Route path="/friends" exact element={<Home />}>
+          <Route path="find" exact element={<Find />} />
+        </Route>
         <Route path="/signIn" exact element={<SignIn />} />
 
         <Route path="/protect" exact element={<Protect />} />

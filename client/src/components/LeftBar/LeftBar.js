@@ -3,10 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import {
-  endLoading,
-  startLoading,
-} from "../../redux/features/loader/loaderSlice";
+import { startLoading } from "../../redux/features/loader/loaderSlice";
 
 function LeftBar() {
   const dispatch = useDispatch();
@@ -14,8 +11,7 @@ function LeftBar() {
 
   const findFriends = () => {
     dispatch(startLoading);
-    navigate("/findFriends");
-    dispatch(endLoading);
+    navigate("/friends/find");
   };
 
   const friendRequests = () => {
