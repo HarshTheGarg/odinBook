@@ -10,12 +10,15 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const userDet = {
+      _id: req.user._id,
       username: req.user.username,
       email: req.user.email,
     };
     res.json({ success: true, user: userDet });
   }
 );
+
+router.use("/friends", passport.authenticate("jwt", {session: false}), require("./friends"))
 
 router.get(
   "/allUsers",

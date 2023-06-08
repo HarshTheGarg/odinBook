@@ -10,12 +10,14 @@ function LeftBar() {
   const navigate = useNavigate();
 
   const findFriends = () => {
-    dispatch(startLoading);
+    dispatch(startLoading());
     navigate("/friends/find");
   };
 
   const friendRequests = () => {
-    console.log("See Friend Requests");
+    dispatch(startLoading());
+    navigate("/friends/requests");
+    // console.log("See Friend Requests");
   };
 
   const allFriends = () => {

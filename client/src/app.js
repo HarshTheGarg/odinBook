@@ -15,6 +15,7 @@ import { Loader } from "./pages/Loader/Loader";
 
 import "./sass/main.sass";
 import Find from "./components/Friends/Find/Find";
+import Requests from "./components/Friends/Requests/Requests";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,8 @@ function App() {
 
         <Route path="/friends" exact element={<Home />}>
           <Route path="find" exact element={<Find />} />
+          <Route path="requests" exact element={<Requests/>} />
+          {/* <Route path="all" exact element={} /> */}
         </Route>
         <Route path="/signIn" exact element={<SignIn />} />
 
