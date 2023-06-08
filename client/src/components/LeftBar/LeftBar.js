@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-// import { changeSectionContent } from "../../redux/features/mainSectionContent/mscSlice";
 import {
   endLoading,
   startLoading,
@@ -15,9 +14,16 @@ function LeftBar() {
 
   const findFriends = () => {
     dispatch(startLoading);
-    // dispatch(changeSectionContent("findFriends"));
     navigate("/findFriends");
     dispatch(endLoading);
+  };
+
+  const friendRequests = () => {
+    console.log("See Friend Requests");
+  };
+
+  const allFriends = () => {
+    console.log("See all friends");
   };
 
   return (
@@ -26,6 +32,12 @@ function LeftBar() {
         <ul>
           <li>
             <button onClick={findFriends}>Find Friends</button>
+          </li>
+          <li>
+            <button onClick={friendRequests}>Friend Requests</button>
+          </li>
+          <li>
+            <button onClick={allFriends}>Friends</button>
           </li>
         </ul>
       </aside>

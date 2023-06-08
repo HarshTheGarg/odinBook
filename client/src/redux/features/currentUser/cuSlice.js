@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { logout, setTokenInLocalStorage } from "../../../lib/authUtils";
+import { endLoading, startLoading } from "../loader/loaderSlice";
 
 const initialState = {
   isLoggedIn: false,
@@ -7,7 +8,8 @@ const initialState = {
   error: "",
 };
 
-export const fetchUser = createAsyncThunk("cu/fetchUser", (data) => {
+export const fetchUser = createAsyncThunk("cu/fetchUser", (data, thunkAPI) => {
+  thunkAPI.dispatch(startLoading());
   if (data) {
     return fetch("http://localhost:3000/auth/local/login", {
       method: "POST",
@@ -40,7 +42,12 @@ export const fetchUser = createAsyncThunk("cu/fetchUser", (data) => {
         throw new Error("Authorization Error");
       })
       .then((result) => {
+        thunkAPI.dispatch(endLoading());
         return result;
+      })
+      .catch((err) => {
+        thunkAPI.dispatch(endLoading());
+        throw err;
       });
   }
 });

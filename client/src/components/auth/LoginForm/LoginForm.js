@@ -6,7 +6,6 @@ import { fetchUser } from "../../../redux/features/currentUser/cuSlice";
 
 import GoogleLogin from "../GoogleLogin";
 import GitHubLogin from "../GitHubLogin";
-import { endLoading, startLoading } from "../../../redux/features/loader/loaderSlice";
 
 function LoginForm() {
   const [email, setEmail] = useState("harsh@example.com"); //TODO remove the default
@@ -27,9 +26,7 @@ function LoginForm() {
       password,
     };
 
-    dispatch(startLoading());
     dispatch(fetchUser(data));
-    dispatch(endLoading());
     
     navigate("/");
   };
