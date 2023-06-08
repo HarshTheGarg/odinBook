@@ -8,9 +8,9 @@ const UserSchema = new Schema({
   email: String,
   passwordHash: String,
   passwordSalt: String,
-  friends: [{type: Schema.Types.ObjectId, ref: "Users"}],
-  friendRequests: [{type: Schema.Types.ObjectId, ref: "Users"}],
-  friendsRequested: [{type: Schema.Types.ObjectId, ref: "Users"}]
+  friends: [{type: Schema.Types.ObjectId, ref: "Users", default:[]}],
+  friendRequests: [{type: Schema.Types.ObjectId, ref: "Users", default:[]}],
+  friendsRequested: [{type: Schema.Types.ObjectId, ref: "Users", default:[]}]
 });
 
 module.exports = mongoose.model("User", UserSchema);

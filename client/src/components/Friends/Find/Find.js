@@ -26,8 +26,6 @@ function Find() {
         if (result.success) {
           setUsersList(result.usersList);
           setRequestedFriends(result.friendsRequested);
-          // console.log(result.usersList);
-          // console.log(result.friendsRequested);
         }
       })
       .catch((err) => {
