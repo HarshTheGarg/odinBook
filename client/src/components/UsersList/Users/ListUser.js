@@ -2,7 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function ListUser({user}) {
-  return <div>{user.username}</div>;
+  const addFriend = () => {
+    console.log(user._id, user.username);
+  }
+  return <>
+    <div>{user.username} ({user.email})</div>
+    <button onClick={addFriend}>Add Friend</button>
+  </>;
 }
 
 ListUser.propTypes = {
