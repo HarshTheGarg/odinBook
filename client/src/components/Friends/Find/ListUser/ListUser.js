@@ -51,7 +51,7 @@ function ListUser({ type, user }) {
       const data = {
         requesteeId: user._id,
       };
-      fetch("http://localhost:3000/user/friends/request", {
+      fetch("http://localhost:3000/user/friends/makeRequest", {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),

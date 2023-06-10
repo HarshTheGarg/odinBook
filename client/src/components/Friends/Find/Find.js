@@ -26,12 +26,13 @@ function Find() {
         if (result.success) {
           setUsersList(result.usersList);
           setRequestedFriends(result.friendsRequested);
+          dispatch(endLoading());
         }
       })
       .catch((err) => {
+        dispatch(endLoading());
         console.log(err);
       });
-    dispatch(endLoading());
   }, []);
 
   return (
@@ -47,10 +48,10 @@ function Find() {
                   <ListUser type="requested" user={user} />
                 </li>
               );
-            }else{
+            } else {
               return (
                 <li key={user._id}>
-                  <ListUser user={user}/>
+                  <ListUser user={user} />
                 </li>
               );
             }

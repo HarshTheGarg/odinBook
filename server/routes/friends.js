@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/find", async (req, res, next) => {
-  const idList = [...req.user.friends, ...req.user.friendRequests]
+  const idList = [...req.user.friends, ...req.user.friendRequests];
   const result = await User.find(
     { _id: { $nin: idList }, email: { $ne: req.user.email } },
     ["_id", "username", "email"]
@@ -23,7 +23,7 @@ router.get("/find", async (req, res, next) => {
   });
 });
 
-router.post("/request", async (req, res, next) => {
+router.post("/makeRequest", async (req, res, next) => {
   // console.log("=========", req.body);
   const requester = await User.findById(req.user._id)
     .then((response) => {
@@ -66,7 +66,7 @@ router.post("/request", async (req, res, next) => {
 });
 
 router.post("/cancelRequest", async (req, res, next) => {
-  console.log("=========", req.body);
+  // console.log("=========", req.body);
   const requester = await User.findById(req.user._id)
     .then((response) => {
       if (!response) {
@@ -110,6 +110,23 @@ router.post("/cancelRequest", async (req, res, next) => {
   res.json({
     success: true,
   });
+});
+
+router.get("/allRequests", async (req, res, next) => {
+  const response = await User.findById(req.user._id, ["friendRequests"])
+    .populate("friendRequests", "_id username email")
+    .then((resp) => {
+      if (!resp) {
+        next(new Error("Some error occurred friends.js"));
+      } else {
+        return resp;
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+
+  res.json({ success: true, requestsList: response.friendRequests });
 });
 
 module.exports = router;
