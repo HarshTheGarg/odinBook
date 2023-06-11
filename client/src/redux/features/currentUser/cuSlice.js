@@ -26,7 +26,12 @@ export const fetchUser = createAsyncThunk("cu/fetchUser", (data, thunkAPI) => {
       })
       .then((result) => {
         setTokenInLocalStorage(result.token, result.expires);
+        thunkAPI.dispatch(endLoading());
         return result;
+      })
+      .catch((err) => {
+        thunkAPI.dispatch(endLoading());
+        throw err;
       });
   } else {
     return fetch("http://localhost:3000/user/data", {
