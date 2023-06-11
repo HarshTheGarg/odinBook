@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { endLoading } from "../../../redux/features/loader/loaderSlice";
-import UsersList from "../../UsersList/UsersList";
 import ListUser from "./ListUser/ListUser";
 
 function Requests() {
@@ -35,7 +34,6 @@ function Requests() {
   return (
     <>
       Requests:
-      {/* <UsersList /> */}
       <ul>
         {requestsList && requestsList.length > 0 && 
         requestsList.map((user) => {
@@ -43,11 +41,11 @@ function Requests() {
             <li key={user}>
               <ListUser user={user} />
             </li>
-          )
+          );
         })}
       </ul>
     </>
   );
 }
 
-export default Requests;
+export default React.memo(Requests);
