@@ -59,7 +59,7 @@ router.post("/cancel", async (req, res, next) => {
       next(err);
     });
   requester.friendsRequested = requester.friendsRequested.filter((id) => {
-    id != req.body.requesteeId;
+    return !(id.equals(req.body.requesteeId))
   });
   // requester.friendsRequested = [req.body.requesteeId];
   requester.save().catch((err) => {
@@ -79,7 +79,7 @@ router.post("/cancel", async (req, res, next) => {
       next(err);
     });
   requestee.friendRequests = requestee.friendRequests.filter((id) => {
-    id != req.user._id;
+    return !(id.equals(req.user._id));
   });
   // requestee.friendRequests = [req.user._id];
   requestee.save().catch((err) => {
@@ -109,4 +109,57 @@ router.get("/all", async (req, res, next) => {
   res.json({ success: true, requestsList: response.friendRequests });
 });
 
-module.exports =  router;
+router.post("/accept", async (req, res, next) => {
+  if (req.user.friendRequests.includes(req.body.accepteeId)) {
+    // console.log(req.body.accepteeId);
+
+    const accepter = await User.findById(req.user._id)
+      .populate("friendRequests", "_id username email")
+      .then((response) => {
+        if (!response) {
+          throw new Error("Authorization Error");
+        }
+        return response;
+      })
+      .catch((err) => {
+        next(err);
+      });
+
+    accepter.friends.push(req.body.accepteeId);
+    accepter.friendRequests = accepter.friendRequests.filter((friend) => {
+      return !(friend._id.equals(req.body.accepteeId))
+    });
+
+    const acceptee = await User.findById(req.body.accepteeId)
+      .then((response) => {
+        if (!response) {
+          throw new Error("Authorization Error");
+        }
+        return response;
+      })
+      .catch((err) => {
+        next(err);
+      });
+
+    acceptee.friends.push(req.user._id);
+    acceptee.friendsRequested = acceptee.friendsRequested.filter((id) => {
+      return !(id.equals(accepter._id));
+    });
+
+    accepter.save().catch((err) => {
+      console.log(err);
+      next(err);
+    });
+
+    acceptee.save().catch((err) => {
+      console.log(err);
+      next(err);
+    });
+
+    // console.log(accepter.friendRequests);
+
+    res.json({ success: true, requestsList: accepter.friendRequests });
+  }
+});
+
+module.exports = router;

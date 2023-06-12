@@ -31,18 +31,20 @@ function Requests() {
         console.log(err);
       });
   }, []);
+  
   return (
     <>
       Requests:
       <ul>
-        {requestsList && requestsList.length > 0 && 
-        requestsList.map((user) => {
-          return (
-            <li key={user._id}>
-              <ListUser user={user} />
-            </li>
-          );
-        })}
+        {requestsList &&
+          requestsList.length > 0 &&
+          requestsList.map((user) => {
+            return (
+              <li key={user._id}>
+                <ListUser user={user} setRequestsList={setRequestsList}/>
+              </li>
+            );
+          })}
       </ul>
     </>
   );
