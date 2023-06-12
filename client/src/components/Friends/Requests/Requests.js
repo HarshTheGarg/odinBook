@@ -38,7 +38,7 @@ function Requests() {
         {requestsList && requestsList.length > 0 && 
         requestsList.map((user) => {
           return (
-            <li key={user}>
+            <li key={user._id}>
               <ListUser user={user} />
             </li>
           );
