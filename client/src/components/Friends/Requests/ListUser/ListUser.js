@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 function ListUser({user}) {
 
   const acceptRequest = () => {
-    console.log("Accept");
+    console.log("Accept", user._id, user.username);
   };
 
   const rejectRequest = () => {

@@ -9,7 +9,7 @@ function Requests() {
   const [requestsList, setRequestsList] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/user/friends/allRequests", {
+    fetch("http://localhost:3000/user/friends/requests/all", {
       headers: {
         Authorization: localStorage.getItem("token"),
       },

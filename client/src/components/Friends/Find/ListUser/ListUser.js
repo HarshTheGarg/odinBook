@@ -23,7 +23,7 @@ function ListUser({ type, user }) {
       const data = {
         requesteeId: user._id,
       };
-      fetch("http://localhost:3000/user/friends/cancelRequest", {
+      fetch("http://localhost:3000/user/friends/requests/cancel", {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -51,7 +51,7 @@ function ListUser({ type, user }) {
       const data = {
         requesteeId: user._id,
       };
-      fetch("http://localhost:3000/user/friends/makeRequest", {
+      fetch("http://localhost:3000/user/friends/requests/make", {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),
