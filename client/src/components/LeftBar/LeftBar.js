@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { startLoading } from "../../redux/features/loader/loaderSlice";
@@ -8,16 +8,20 @@ import { startLoading } from "../../redux/features/loader/loaderSlice";
 function LeftBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const findFriends = () => {
-    dispatch(startLoading());
-    navigate("/friends/find");
+    if (location.pathname != "/friends/find") {
+      dispatch(startLoading());
+      navigate("/friends/find");
+    }
   };
 
   const friendRequests = () => {
-    dispatch(startLoading());
-    navigate("/friends/requests");
-    // console.log("See Friend Requests");
+    if (location.pathname != "/friends/requests") {
+      dispatch(startLoading());
+      navigate("/friends/requests");
+    }
   };
 
   const allFriends = () => {
