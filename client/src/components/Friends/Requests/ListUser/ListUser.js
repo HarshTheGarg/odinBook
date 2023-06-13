@@ -33,8 +33,30 @@ function ListUser({ user, setRequestsList }) {
       });
   };
 
+  
+
   const rejectRequest = () => {
-    console.log("Reject");
+    dispatch(startLoading());
+
+    fetch("http://localhost:3000/user/friends/requests/reject", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ rejecteeId: user._id }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setRequestsList(data.requestsList);
+        dispatch(endLoading());
+      })
+      .catch((err) => {
+        dispatch(endLoading());
+        console.log(err);
+      });
   };
 
   return (

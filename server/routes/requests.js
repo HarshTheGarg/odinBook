@@ -94,25 +94,23 @@ router.post("/cancel", async (req, res, next) => {
 });
 
 router.get("/all", async (req, res, next) => {
-  
-    const response = await User.findById(req.user._id, ["friendRequests"])
-      .populate("friendRequests", "_id username email")
-      .then((resp) => {
-        if (!resp) {
-          const error = new Error("User Not Found");
-          error.statusCode = 401;
-          next(error);
-        } else {
-          return resp;
-        }
-      })
-      .catch((err) => {
-        next(err);
-      });
+  const response = await User.findById(req.user._id, ["friendRequests"])
+    .populate("friendRequests", "_id username email")
+    .then((resp) => {
+      if (!resp) {
+        const error = new Error("User Not Found");
+        error.statusCode = 401;
+        next(error);
+      } else {
+        return resp;
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
 
-    res.json({ success: true, requestsList: response.friendRequests });
-  }
-);
+  res.json({ success: true, requestsList: response.friendRequests });
+});
 
 router.post("/accept", async (req, res, next) => {
   if (req.user.friendRequests.includes(req.body.accepteeId)) {
@@ -170,6 +168,7 @@ router.post("/accept", async (req, res, next) => {
 router.post("/reject", async (req, res, next) => {
   if (req.user.friendRequests.includes(req.body.rejecteeId)) {
     const rejecter = await User.findById(req.user._id)
+      .populate("friendRequests", "_id username email")
       .then((response) => {
         if (!response) {
           const error = new Error("User Not Found");
@@ -182,22 +181,41 @@ router.post("/reject", async (req, res, next) => {
         next(err);
       });
 
-    rejecter.friendRequests = rejecter.friendRequests.filter((id) => {
-      return id != req.body.rejecteeId;
+    rejecter.friendRequests = rejecter.friendRequests.filter((friend) => {
+      return !friend._id.equals(req.body.rejecteeId);
     });
 
-    const rejectee = await User.findById(req.body.rejecteeId).then(
-      (response) => {
+    const rejectee = await User.findById(req.body.rejecteeId)
+      .then((response) => {
         if (!response) {
           const error = new Error("User Not Found");
           error.statusCode = 401;
           next(error);
         }
         return response;
-      }
-    );
+      })
+      .catch((err) => {
+        next(err);
+      });
+
+    rejectee.friendsRequested = rejectee.friendsRequested.filter((id) => {
+      return !id.equals(req.user._id);
+    });
+
+    rejecter.save().catch((err) => {
+      console.log(err);
+      next(err);
+    });
+
+    rejectee.save().catch((err) => {
+      console.log(err);
+      next(err);
+    });
+
+    res.json({success: true, requestsList: rejecter.friendRequests})
+
   } else {
-    res.status(400).json({ success: false });
+    res.status(404).json({ success: false, msg:"Friend not found" });
   }
 });
 
