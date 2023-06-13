@@ -3,7 +3,7 @@ const passport = require("passport");
 
 const router = express.Router();
 
-const User = require("../models/User");
+// const User = require("../models/User");
 
 router.get(
   "/data",
@@ -18,9 +18,19 @@ router.get(
   }
 );
 
-router.use("/friends", passport.authenticate("jwt", {session: false}), require("./friends"))
+router.use(
+  "/friends",
+  passport.authenticate("jwt", { session: false, failureRedirect: "/user/failure" }),
+  require("./friends")
+);
 
-router.get(
+router.use("/failure", (req, res, next) => {
+  const error = new Error("User Not Found");
+  error.statusCode = 401;
+  next(error);
+});
+
+/* router.get(
   "/allUsers",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
@@ -33,6 +43,6 @@ router.get(
         next(err);
       });
   }
-);
+); */
 
 module.exports = router;

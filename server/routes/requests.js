@@ -189,7 +189,9 @@ router.post("/reject", async (req, res, next) => {
     const rejectee = await User.findById(req.body.rejecteeId).then(
       (response) => {
         if (!response) {
-          throw new Error("Authorization Error");
+          const error = new Error("User Not Found");
+          error.statusCode = 401;
+          next(error);
         }
         return response;
       }
