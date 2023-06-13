@@ -23,6 +23,24 @@ router.get("/find", async (req, res, next) => {
   });
 });
 
+router.get("/all", async (req, res, next) => {
+  const result = await User.find({_id: {$in: req.user.friends}}, "_id username email")
+    .then((response) => {
+      if(!response) {
+        return null;
+      } else {
+        return response;
+      }
+    }).catch((err) => {
+      next(err);
+    });
+  
+  res.json({
+    success: true,
+    friendsList: result
+  })
+})
+
 router.use("/requests", require("./requests"));
 
 module.exports = router;

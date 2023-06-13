@@ -25,7 +25,11 @@ function LeftBar() {
   };
 
   const allFriends = () => {
-    console.log("See all friends");
+    if(location.pathname != "/friends/all") {
+      dispatch(startLoading());
+      console.log("See all friends");
+      navigate("/friends/all");
+    }
   };
 
   return (
