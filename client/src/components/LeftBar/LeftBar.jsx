@@ -10,6 +10,13 @@ function LeftBar() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const allPosts = () => {
+    if (location.pathname != "/") {
+      dispatch(startLoading());
+      navigate("/");
+    }
+  };
+
   const findFriends = () => {
     if (location.pathname != "/friends/find") {
       dispatch(startLoading());
@@ -25,7 +32,7 @@ function LeftBar() {
   };
 
   const allFriends = () => {
-    if(location.pathname != "/friends/all") {
+    if (location.pathname != "/friends/all") {
       dispatch(startLoading());
       navigate("/friends/all");
     }
@@ -37,7 +44,11 @@ function LeftBar() {
         <ul>
           <li>
             Posts
-            
+            <ul>
+              <li>
+                <button onClick={allPosts}>All Posts</button>
+              </li>
+            </ul>
           </li>
           <li>
             Friends
