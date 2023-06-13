@@ -15,15 +15,14 @@ function Requests() {
       },
     })
       .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        }
-        throw new Error("Authorization Error");
+        return response.json();
       })
       .then((result) => {
         if (result.success) {
           setRequestsList(result.requestsList);
           dispatch(endLoading());
+        } else {
+          throw result;
         }
       })
       .catch((err) => {
@@ -31,7 +30,7 @@ function Requests() {
         console.log(err);
       });
   }, []);
-  
+
   return (
     <>
       Requests:
@@ -41,7 +40,7 @@ function Requests() {
           requestsList.map((user) => {
             return (
               <li key={user._id}>
-                <ListUser user={user} setRequestsList={setRequestsList}/>
+                <ListUser user={user} setRequestsList={setRequestsList} />
               </li>
             );
           })}

@@ -14,12 +14,12 @@ function ListUser({ type, user }) {
 
   const request = () => {
     dispatch(startLoading());
-    
+
     if (requested) {
       // Un-request
       // console.log("Un-Request");
       // setRequested(!requested);
-      
+
       const data = {
         requesteeId: user._id,
       };
@@ -27,7 +27,7 @@ function ListUser({ type, user }) {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
         body: JSON.stringify(data),
       })
@@ -35,16 +35,13 @@ function ListUser({ type, user }) {
           if (response.status === 200) {
             dispatch(endLoading());
             setRequested(!requested);
-            return response.json();
           }
-          throw new Error("Server Error Find/ListUser.js");
+          return response.json();
         })
         .catch((err) => {
           console.log(err);
           dispatch(endLoading());
         });
-
-
     } else {
       // Request
       // console.log("Request");
@@ -55,7 +52,7 @@ function ListUser({ type, user }) {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
         body: JSON.stringify(data),
       })
@@ -63,9 +60,8 @@ function ListUser({ type, user }) {
           if (response.status === 200) {
             dispatch(endLoading());
             setRequested(!requested);
-            return response.json();
           }
-          throw new Error("Server Error Find/ListUser.js");
+          return response.json();
         })
         .catch((err) => {
           console.log(err);

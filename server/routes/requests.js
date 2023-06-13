@@ -8,7 +8,9 @@ router.post("/make", async (req, res, next) => {
   const requester = await User.findById(req.user._id)
     .then((response) => {
       if (!response) {
-        next(new Error("User Not Found"));
+        const error = new Error("User Not Found");
+        error.statusCode = 401;
+        next(error);
       }
       return response;
     })
@@ -24,7 +26,9 @@ router.post("/make", async (req, res, next) => {
   const requestee = await User.findById(req.body.requesteeId)
     .then((response) => {
       if (!response) {
-        next(new Error("User Not Found"));
+        const error = new Error("User Not Found");
+        error.statusCode = 401;
+        next(error);
       }
       return response;
     })
@@ -46,7 +50,9 @@ router.post("/cancel", async (req, res, next) => {
   const requester = await User.findById(req.user._id)
     .then((response) => {
       if (!response) {
-        next(new Error("User Not Found"));
+        const error = new Error("User Not Found");
+        error.statusCode = 401;
+        next(error);
       }
       return response;
     })
@@ -54,7 +60,7 @@ router.post("/cancel", async (req, res, next) => {
       next(err);
     });
   requester.friendsRequested = requester.friendsRequested.filter((id) => {
-    return !(id.equals(req.body.requesteeId))
+    return !id.equals(req.body.requesteeId);
   });
   requester.save().catch((err) => {
     console.log(err);
@@ -64,7 +70,9 @@ router.post("/cancel", async (req, res, next) => {
   const requestee = await User.findById(req.body.requesteeId)
     .then((response) => {
       if (!response) {
-        next(new Error("User Not Found"));
+        const error = new Error("User Not Found");
+        error.statusCode = 401;
+        next(error);
       }
       return response;
     })
@@ -72,7 +80,7 @@ router.post("/cancel", async (req, res, next) => {
       next(err);
     });
   requestee.friendRequests = requestee.friendRequests.filter((id) => {
-    return !(id.equals(req.user._id));
+    return !id.equals(req.user._id);
   });
 
   requestee.save().catch((err) => {
@@ -86,30 +94,35 @@ router.post("/cancel", async (req, res, next) => {
 });
 
 router.get("/all", async (req, res, next) => {
-  const response = await User.findById(req.user._id, ["friendRequests"])
-    .populate("friendRequests", "_id username email")
-    .then((resp) => {
-      if (!resp) {
-        next(new Error("Some error occurred friends.js"));
-      } else {
-        return resp;
-      }
-    })
-    .catch((err) => {
-      next(err);
-    });
+  
+    const response = await User.findById(req.user._id, ["friendRequests"])
+      .populate("friendRequests", "_id username email")
+      .then((resp) => {
+        if (!resp) {
+          const error = new Error("User Not Found");
+          error.statusCode = 401;
+          next(error);
+        } else {
+          return resp;
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
 
-  res.json({ success: true, requestsList: response.friendRequests });
-});
+    res.json({ success: true, requestsList: response.friendRequests });
+  }
+);
 
 router.post("/accept", async (req, res, next) => {
   if (req.user.friendRequests.includes(req.body.accepteeId)) {
-
     const accepter = await User.findById(req.user._id)
       .populate("friendRequests", "_id username email")
       .then((response) => {
         if (!response) {
-          throw new Error("Authorization Error");
+          const error = new Error("User Not Found");
+          error.statusCode = 401;
+          next(error);
         }
         return response;
       })
@@ -119,7 +132,7 @@ router.post("/accept", async (req, res, next) => {
 
     accepter.friends.push(req.body.accepteeId);
     accepter.friendRequests = accepter.friendRequests.filter((friend) => {
-      return !(friend._id.equals(req.body.accepteeId))
+      return !friend._id.equals(req.body.accepteeId);
     });
 
     const acceptee = await User.findById(req.body.accepteeId)
@@ -135,7 +148,7 @@ router.post("/accept", async (req, res, next) => {
 
     acceptee.friends.push(req.user._id);
     acceptee.friendsRequested = acceptee.friendsRequested.filter((id) => {
-      return !(id.equals(accepter._id));
+      return !id.equals(accepter._id);
     });
 
     accepter.save().catch((err) => {
@@ -149,6 +162,40 @@ router.post("/accept", async (req, res, next) => {
     });
 
     res.json({ success: true, requestsList: accepter.friendRequests });
+  } else {
+    res.status(400).json({ success: false });
+  }
+});
+
+router.post("/reject", async (req, res, next) => {
+  if (req.user.friendRequests.includes(req.body.rejecteeId)) {
+    const rejecter = await User.findById(req.user._id)
+      .then((response) => {
+        if (!response) {
+          const error = new Error("User Not Found");
+          error.statusCode = 401;
+          next(error);
+        }
+        return response;
+      })
+      .catch((err) => {
+        next(err);
+      });
+
+    rejecter.friendRequests = rejecter.friendRequests.filter((id) => {
+      return id != req.body.rejecteeId;
+    });
+
+    const rejectee = await User.findById(req.body.rejecteeId).then(
+      (response) => {
+        if (!response) {
+          throw new Error("Authorization Error");
+        }
+        return response;
+      }
+    );
+  } else {
+    res.status(400).json({ success: false });
   }
 });
 

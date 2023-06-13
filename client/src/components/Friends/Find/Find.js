@@ -17,16 +17,15 @@ function Find() {
       },
     })
       .then((response) => {
-        if (response.status === 200) {
           return response.json();
-        }
-        throw new Error("Authorization Error");
       })
       .then((result) => {
         if (result.success) {
           setUsersList(result.usersList);
           setRequestedFriends(result.friendsRequested);
           dispatch(endLoading());
+        } else {
+          throw result;
         }
       })
       .catch((err) => {

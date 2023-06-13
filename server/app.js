@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 // Passport to authenticate the users
-const passport = require('passport');
+const passport = require("passport");
 
 // Passport Strategies
 // use the passport jwt strategy
@@ -51,18 +51,21 @@ app.use((req, res) => {
 });
 
 // if any function calls next(err) etc
-app.use((err, req, res) => {
-  console.log("Some Error: Error Handler Called");
+// Do not change the line below!!
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  console.log(
+    "<<===========================>>Some Error: Error Handler Called"
+  );
   const status = err.statusCode || 500;
   const msg = err.message || "Something is wrong";
-  res.status(status);
-  res.json({
+  console.log(status, msg);
+  res.status(status).json({
     success: false,
     status,
-    msg
-  })
-})
-
+    msg,
+  });
+});
 
 // Set port to listen on using the env variables if available or else standard port
 const port = process.env.PORT || 3000;
