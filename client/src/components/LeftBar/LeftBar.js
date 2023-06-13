@@ -27,7 +27,6 @@ function LeftBar() {
   const allFriends = () => {
     if(location.pathname != "/friends/all") {
       dispatch(startLoading());
-      console.log("See all friends");
       navigate("/friends/all");
     }
   };
