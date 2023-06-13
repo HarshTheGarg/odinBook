@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import UsersList from "../../UsersList/UsersList";
+
 import { useDispatch } from "react-redux";
 import { endLoading } from "../../../redux/features/loader/loaderSlice";
-import ListUser from "./ListUser/ListUser";
+
+import ListUser from "./ListUser/ListUser.jsx";
 
 function Find() {
   const dispatch = useDispatch();

@@ -3,20 +3,23 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import NavBar from "./components/Navbar/NavBar";
-import Home from "./pages/Home/Home";
-import Protect from "./pages/Protect";
-import SignIn from "./pages/Signin/SignIn";
-import OAuthRedirect from "./pages/OAuthRedirect";
+import Loader from "./pages/Loader/Loader.jsx";
+import NavBar from "./components/Navbar/NavBar.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Protect from "./pages/Protect.jsx";
+import SignIn from "./pages/Signin/SignIn.jsx";
+import OAuthRedirect from "./pages/OAuthRedirect.jsx";
+
+import Find from "./components/Friends/Find/Find.jsx";
+import Requests from "./components/Friends/Requests/Requests.jsx";
+import AllFriends from "./components/Friends/All/AllFriends.jsx";
+
+import AllPosts from "./components/Post/AllPosts/AllPosts.jsx";
 
 import { tokenExists } from "./lib/authUtils";
 import { fetchUser } from "./redux/features/currentUser/cuSlice";
-import { Loader } from "./pages/Loader/Loader";
 
 import "./sass/main.sass";
-import Find from "./components/Friends/Find/Find";
-import Requests from "./components/Friends/Requests/Requests";
-import AllFriends from "./components/Friends/All/AllFriends";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +36,9 @@ function App() {
       <Loader />
       <NavBar />
       <Routes>
-        <Route path="/" exact element={<Home />} />
+        <Route path="/" exact element={<Home />} > 
+          <Route index element={<AllPosts />} />
+        </Route>
 
         <Route path="/friends" exact element={<Home />}>
           <Route path="find" exact element={<Find />} />

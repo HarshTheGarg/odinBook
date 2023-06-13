@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    index: "./src/index.js",
+    index: "./src/index.jsx",
   },
 
   output: {
@@ -28,7 +28,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",

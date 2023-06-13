@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
 import { useDispatch } from "react-redux";
 import {
   endLoading,
   startLoading,
 } from "../../../../redux/features/loader/loaderSlice";
+
 function ListUser({ type, user }) {
   const [requested, setRequested] = useState(
     type == "requested" ? true : false

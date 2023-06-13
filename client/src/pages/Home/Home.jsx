@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import LeftBar from "../../components/LeftBar/LeftBar";
-import RightBar from "../../components/RightBar/RightBar";
-import MainSection from "../../components/MainSection/MainSection";
+import LeftBar from "../../components/LeftBar/LeftBar.jsx";
+import RightBar from "../../components/RightBar/RightBar.jsx";
+import MainSection from "../../components/MainSection/MainSection.jsx";
 
 function Home() {
   const state = useSelector((state) => state.cu);

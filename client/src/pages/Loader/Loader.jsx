@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-export const Loader = () => {
+function Loader() {
   const state = useSelector((state) => state.loader);
 
   if (state.isLoading) {
@@ -12,3 +12,5 @@ export const Loader = () => {
     );
   }
 };
+
+export default Loader;

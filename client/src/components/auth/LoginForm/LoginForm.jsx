@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../../redux/features/currentUser/cuSlice";
 
-import GoogleLogin from "../GoogleLogin";
-import GitHubLogin from "../GitHubLogin";
+import GoogleLogin from "../GoogleLogin.jsx";
+import GitHubLogin from "../GitHubLogin.jsx";
 
 function LoginForm() {
   const [email, setEmail] = useState("harsh@example.com"); //TODO remove the default

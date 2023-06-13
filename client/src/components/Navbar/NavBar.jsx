@@ -1,9 +1,11 @@
 import React from "react";
-import { logout } from "../../lib/authUtils";
 import { Link, useNavigate } from "react-router-dom";
+
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../redux/features/currentUser/cuSlice";
 import { endLoading, startLoading } from "../../redux/features/loader/loaderSlice";
+
+import { logout } from "../../lib/authUtils";
 
 function NavBar() {
   const navigate = useNavigate();

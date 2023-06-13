@@ -36,13 +36,22 @@ function LeftBar() {
       <aside className="leftBar">
         <ul>
           <li>
-            <button onClick={findFriends}>Find Friends</button>
+            Posts
+            
           </li>
           <li>
-            <button onClick={friendRequests}>Friend Requests</button>
-          </li>
-          <li>
-            <button onClick={allFriends}>Friends</button>
+            Friends
+            <ul>
+              <li>
+                <button onClick={findFriends}>Find Friends</button>
+              </li>
+              <li>
+                <button onClick={friendRequests}>Friend Requests</button>
+              </li>
+              <li>
+                <button onClick={allFriends}>Friends</button>
+              </li>
+            </ul>
           </li>
         </ul>
       </aside>
