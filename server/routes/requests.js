@@ -16,7 +16,6 @@ router.post("/make", async (req, res, next) => {
       next(err);
     });
   requester.friendsRequested.push(req.body.requesteeId);
-  // requester.friendsRequested = [req.body.requesteeId];
   requester.save().catch((err) => {
     console.log(err);
     next(err);
@@ -25,7 +24,6 @@ router.post("/make", async (req, res, next) => {
   const requestee = await User.findById(req.body.requesteeId)
     .then((response) => {
       if (!response) {
-        // console.log("SDFSDFSDFSDFSDF");
         next(new Error("User Not Found"));
       }
       return response;
@@ -34,7 +32,6 @@ router.post("/make", async (req, res, next) => {
       next(err);
     });
   requestee.friendRequests.push(req.user._id);
-  // requestee.friendRequests = [req.user._id];
   requestee.save().catch((err) => {
     console.log(err);
     next(err);
@@ -46,13 +43,11 @@ router.post("/make", async (req, res, next) => {
 });
 
 router.post("/cancel", async (req, res, next) => {
-  // console.log("=========", req.body);
   const requester = await User.findById(req.user._id)
     .then((response) => {
       if (!response) {
         next(new Error("User Not Found"));
       }
-      // console.log(response);
       return response;
     })
     .catch((err) => {
@@ -61,7 +56,6 @@ router.post("/cancel", async (req, res, next) => {
   requester.friendsRequested = requester.friendsRequested.filter((id) => {
     return !(id.equals(req.body.requesteeId))
   });
-  // requester.friendsRequested = [req.body.requesteeId];
   requester.save().catch((err) => {
     console.log(err);
     next(err);
@@ -70,7 +64,6 @@ router.post("/cancel", async (req, res, next) => {
   const requestee = await User.findById(req.body.requesteeId)
     .then((response) => {
       if (!response) {
-        // console.log("SDFSDFSDFSDFSDF");
         next(new Error("User Not Found"));
       }
       return response;
@@ -81,7 +74,7 @@ router.post("/cancel", async (req, res, next) => {
   requestee.friendRequests = requestee.friendRequests.filter((id) => {
     return !(id.equals(req.user._id));
   });
-  // requestee.friendRequests = [req.user._id];
+
   requestee.save().catch((err) => {
     console.log(err);
     next(err);
@@ -111,7 +104,6 @@ router.get("/all", async (req, res, next) => {
 
 router.post("/accept", async (req, res, next) => {
   if (req.user.friendRequests.includes(req.body.accepteeId)) {
-    // console.log(req.body.accepteeId);
 
     const accepter = await User.findById(req.user._id)
       .populate("friendRequests", "_id username email")
@@ -155,8 +147,6 @@ router.post("/accept", async (req, res, next) => {
       console.log(err);
       next(err);
     });
-
-    // console.log(accepter.friendRequests);
 
     res.json({ success: true, requestsList: accepter.friendRequests });
   }
