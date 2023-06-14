@@ -17,6 +17,10 @@ function LeftBar() {
     }
   };
 
+  const createPost = () => {
+    console.log("Create Post");
+  };
+
   const findFriends = () => {
     if (location.pathname != "/friends/find") {
       dispatch(startLoading());
@@ -47,6 +51,9 @@ function LeftBar() {
             <ul>
               <li>
                 <button onClick={allPosts}>All Posts</button>
+              </li>
+              <li>
+                <button onClick={createPost}>Create Post</button>
               </li>
             </ul>
           </li>
