@@ -8,6 +8,12 @@ function AllPosts() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    fetch("http://localhost:3000/post/all")
+      .then((response) => {
+        return response.json();
+      }).then((result) => {
+        console.log(result);
+      });
     dispatch(endLoading());
   }, []);
 

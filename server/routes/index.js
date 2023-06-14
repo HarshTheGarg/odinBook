@@ -15,7 +15,9 @@ router.get("/test", (req, res) => {
   res.json({ msg: "I am a test" });
 });
 
-router.use("/user", require("./user"))
+router.use("/user", require("./user"));
+
+router.use("/post", require("./posts"));
 
 // TODO Enable while deploying
 /* router.use("*", (req, res) => {
