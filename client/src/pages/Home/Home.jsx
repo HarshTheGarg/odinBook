@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 
 import LeftBar from "../../components/LeftBar/LeftBar.jsx";
 import RightBar from "../../components/RightBar/RightBar.jsx";
@@ -19,8 +18,6 @@ function Home() {
         </div>
       </>
     );
-  } else {
-    return <Navigate to={"/signIn"} />;
   }
 }
 
