@@ -6,6 +6,7 @@ import {
   endLoading,
   startLoading,
 } from "../../../../redux/features/loader/loaderSlice";
+import { useNavigate } from "react-router-dom";
 
 function ListUser({ type, user }) {
   const [requested, setRequested] = useState(
@@ -16,6 +17,7 @@ function ListUser({ type, user }) {
 
   const request = () => {
     dispatch(startLoading());
+    const navigate = useNavigate();
 
     if (requested) {
       // Un-request
@@ -41,6 +43,9 @@ function ListUser({ type, user }) {
           return response.json();
         })
         .catch((err) => {
+          if (err.status == 401) {
+            navigate("/Unauthorized");
+          }
           console.log(err);
           dispatch(endLoading());
         });
@@ -66,6 +71,9 @@ function ListUser({ type, user }) {
           return response.json();
         })
         .catch((err) => {
+          if(err.status == 401) {
+            navigate("/Unauthorized");
+          }
           console.log(err);
           dispatch(endLoading());
         });

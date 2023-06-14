@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { endLoading } from "../../../redux/features/loader/loaderSlice";
 
 import ListUser from "./ListUser/ListUser.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Find() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [usersList, setUsersList] = useState([]);
   const [requestedFriends, setRequestedFriends] = useState([]);
@@ -18,7 +20,7 @@ function Find() {
       },
     })
       .then((response) => {
-          return response.json();
+        return response.json();
       })
       .then((result) => {
         if (result.success) {
@@ -30,6 +32,9 @@ function Find() {
         }
       })
       .catch((err) => {
+        if (err.status == 401) {
+          navigate("/Unauthorized");
+        }
         dispatch(endLoading());
         console.log(err);
       });

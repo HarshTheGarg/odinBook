@@ -6,9 +6,11 @@ import {
   endLoading,
   startLoading,
 } from "../../../../redux/features/loader/loaderSlice";
+import { useNavigate } from "react-router-dom";
 
 function ListUser({ user, setFriendsList }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const removeFriend = () => {
     dispatch(startLoading());
@@ -32,6 +34,9 @@ function ListUser({ user, setFriendsList }) {
         }
       })
       .catch((err) => {
+        if(err.status == 401) {
+          navigate("/Unauthorized");
+        }
         console.log(err);
         dispatch(endLoading());
       });

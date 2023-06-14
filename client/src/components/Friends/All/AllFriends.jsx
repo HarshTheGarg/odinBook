@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { endLoading } from "../../../redux/features/loader/loaderSlice";
 
 import ListUser from "./ListUser/ListUser.jsx";
+import { useNavigate } from "react-router-dom";
 
 function AllFriends() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [friendsList, setFriendsList] = useState([]);
 
@@ -30,6 +32,9 @@ function AllFriends() {
       })
       .catch((err) => {
         console.log(err);
+        if(err.status == 401) {
+          navigate("/Unauthorized");
+        }
         dispatch(endLoading());
       });
   }, []);

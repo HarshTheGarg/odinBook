@@ -4,10 +4,12 @@ import { useDispatch } from "react-redux";
 import { endLoading } from "../../../redux/features/loader/loaderSlice";
 
 import ListUser from "./ListUser/ListUser.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Requests() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const [requestsList, setRequestsList] = useState([]);
 
   useEffect(() => {
@@ -28,6 +30,9 @@ function Requests() {
         }
       })
       .catch((err) => {
+        if(err.status == 401) {
+          navigate("/Unauthorized");
+        }
         dispatch(endLoading());
         console.log(err);
       });

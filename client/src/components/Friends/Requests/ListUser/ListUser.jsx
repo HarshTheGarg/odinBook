@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
 import { endLoading, startLoading } from "../../../../redux/features/loader/loaderSlice";
+import { useNavigate } from "react-router-dom";
 
 function ListUser({ user, setRequestsList }) {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const acceptRequest = () => {
 
@@ -29,6 +31,9 @@ function ListUser({ user, setRequestsList }) {
         dispatch(endLoading());
       })
       .catch((err) => {
+        if(err.status == 401) {
+          navigate("/Unauthorized");
+        }
         dispatch(endLoading());
         console.log(err);
       });
@@ -55,6 +60,9 @@ function ListUser({ user, setRequestsList }) {
         dispatch(endLoading());
       })
       .catch((err) => {
+        if(err.status == 401) {
+          navigate("/Unauthorized");
+        }
         dispatch(endLoading());
         console.log(err);
       });

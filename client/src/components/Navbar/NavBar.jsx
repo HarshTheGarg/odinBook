@@ -15,11 +15,11 @@ function NavBar() {
 
   const submitLogout = () => {
 
-    dispatch(startLoading);
+    dispatch(startLoading());
     logout();
 
     dispatch(removeUser());
-    dispatch(endLoading);
+    dispatch(endLoading());
 
     navigate("/");
   };

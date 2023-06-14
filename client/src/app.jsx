@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home.jsx";
 import Protect from "./pages/Protect.jsx";
 import SignIn from "./pages/Signin/SignIn.jsx";
 import OAuthRedirect from "./pages/OAuthRedirect.jsx";
+import Unauthorized from "./pages/Unauthorized/Unauthorized.jsx";
 
 import Find from "./components/Friends/Find/Find.jsx";
 import Requests from "./components/Friends/Requests/Requests.jsx";
@@ -36,7 +37,7 @@ function App() {
       <Loader />
       <NavBar />
       <Routes>
-        <Route path="/" exact element={<Home />} > 
+        <Route path="/" exact element={<Home />} >
           <Route index element={<AllPosts />} />
         </Route>
 
@@ -51,6 +52,8 @@ function App() {
         <Route path="/protect" exact element={<Protect />} />
 
         <Route path="/OAuthRedirect" exact element={<OAuthRedirect />} />
+
+        <Route path="/Unauthorized" element={<Unauthorized />} />
       </Routes>
     </BrowserRouter>
   );
