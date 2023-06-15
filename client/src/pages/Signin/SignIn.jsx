@@ -1,20 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import LoginForm from "../../components/auth/LoginForm/LoginForm.jsx";
+import { Outlet } from "react-router-dom";
 
 function SignIn() {
-  const state = useSelector((state) => state.cu);
 
-  if (!state.isLoggedIn) {
     return (
       <>
         <div className="signIn">
           <LoginForm />
         </div>
+        <Outlet />
       </>
     );
-  }
 }
 
 export default React.memo(SignIn);

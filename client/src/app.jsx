@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "./pages/Loader/Loader.jsx";
-import NavBar from "./components/Navbar/NavBar.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Protect from "./pages/Protect.jsx";
 import SignIn from "./pages/Signin/SignIn.jsx";
@@ -35,27 +34,30 @@ function App() {
   return (
     <BrowserRouter>
       <Loader />
-      <NavBar />
-      <SignIn />
-
       <Routes>
-        <Route path="/" exact element={<Home />} >
-          <Route index element={<AllPosts />} />
-        </Route>
+        {!state.isLoggedIn ? (
+          <>
+            <Route path="/*" exact element={<SignIn />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" exact element={<Home />}>
+              <Route index element={<AllPosts />} />
+            </Route>
 
-        <Route path="/friends" exact element={<Home />}>
-          <Route path="find" exact element={<Find />} />
-          <Route path="requests" exact element={<Requests />} />
-          <Route path="all" exact element={<AllFriends />} />
-        </Route>
+            <Route path="/friends" exact element={<Home />}>
+              <Route path="find" exact element={<Find />} />
+              <Route path="requests" exact element={<Requests />} />
+              <Route path="all" exact element={<AllFriends />} />
+            </Route>
 
-        {/* <Route path="/signIn" exact element={<SignIn />} /> */}
+            <Route path="/signIn" exact element={<SignIn />} />
 
-        <Route path="/protect" exact element={<Protect />} />
-
-        <Route path="/OAuthRedirect" exact element={<OAuthRedirect />} />
-
+            <Route path="/protect" exact element={<Protect />} />
+          </>
+        )}
         <Route path="/Unauthorized" element={<Unauthorized />} />
+        <Route path="/OAuthRedirect" exact element={<OAuthRedirect />} />
       </Routes>
     </BrowserRouter>
   );
