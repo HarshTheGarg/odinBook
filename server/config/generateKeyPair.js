@@ -19,8 +19,8 @@ function genKeyPair() {
   });
 
   // Save the keys in different files
-  fs.writeFileSync(__dirname + "/keys" + "/id_rsa_pub.pem", keyPair.publicKey);
-  fs.writeFileSync(__dirname + "/keys/" + "id_rsa_pri.pem", keyPair.privateKey);
+  fs.writeFileSync(__dirname + "/../keys" + "/id_rsa_pub.pem", keyPair.publicKey);
+  fs.writeFileSync(__dirname + "/../keys/" + "id_rsa_pri.pem", keyPair.privateKey);
 }
 
 genKeyPair();
