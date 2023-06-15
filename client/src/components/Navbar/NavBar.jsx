@@ -24,10 +24,6 @@ function NavBar() {
     navigate("/");
   };
 
-  const submitSingIn = () => {
-    navigate("/signIn");
-  };
-
   return (
     <>
       <nav>
@@ -36,9 +32,7 @@ function NavBar() {
           <li>
             {state.isLoggedIn ? (
               <button onClick={submitLogout}>Logout</button>
-            ) : (
-              <button onClick={submitSingIn}>Sing in</button>
-            )}
+            ) : null }
           </li>
           <br />
         </ul>
