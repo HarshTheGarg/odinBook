@@ -15,8 +15,6 @@ function SignIn() {
         </div>
       </>
     );
-  } else {
-    return <Navigate to={"/"} />;
   }
 }
 

@@ -36,6 +36,8 @@ function App() {
     <BrowserRouter>
       <Loader />
       <NavBar />
+      <SignIn />
+
       <Routes>
         <Route path="/" exact element={<Home />} >
           <Route index element={<AllPosts />} />
@@ -47,7 +49,7 @@ function App() {
           <Route path="all" exact element={<AllFriends />} />
         </Route>
 
-        <Route path="/signIn" exact element={<SignIn />} />
+        {/* <Route path="/signIn" exact element={<SignIn />} /> */}
 
         <Route path="/protect" exact element={<Protect />} />
 
