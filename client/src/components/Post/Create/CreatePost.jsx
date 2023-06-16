@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
 
   const [caption, setCaption] = useState("");
+  const navigate = useNavigate();
 
   const changeCaption = (e) => {
     setCaption(e.target.value);
@@ -21,7 +23,17 @@ function CreatePost() {
     }).then((response) => {
       return response.json();
     }).then((result) => {
-      console.log(result);
+      if (result.success) {
+        console.log(result);
+      } else {
+        throw result;
+      }
+    })
+    .catch((err) => {
+      if(err.status == 401) {
+        navigate("/Unauthorized");
+      }
+      console.log(err);
     });
   };
 
