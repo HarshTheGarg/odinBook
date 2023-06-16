@@ -24,7 +24,7 @@ function CreatePost() {
       return response.json();
     }).then((result) => {
       if (result.success) {
-        console.log(result);
+        navigate("/");
       } else {
         throw result;
       }
