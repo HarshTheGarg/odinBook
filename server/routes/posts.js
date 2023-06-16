@@ -7,8 +7,13 @@ router.get("/", (req, res) => {
   res.json({ msg: "Working" });
 });
 
-router.get("/all", (req, res) => {
-  res.json({ success: true, msg: "All posts" });
+router.get("/all", async (req, res) => {
+  await Post.find({"author": {$in: [...req.user.friends, req.user._id]}})
+    .sort({"dateTime": -1})
+    .populate("author", "email username")
+    .then((result) => {
+      res.json({ success: true, posts: result });
+    });
 });
 
 router.post("/create", (req, res, next) => {
