@@ -14,10 +14,10 @@ function ListUser({ type, user }) {
   );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const request = () => {
     dispatch(startLoading());
-    const navigate = useNavigate();
 
     if (requested) {
       // Un-request
