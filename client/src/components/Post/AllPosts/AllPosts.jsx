@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   endLoading,
   startLoading,
 } from "../../../redux/features/loader/loaderSlice";
-import { useNavigate } from "react-router-dom";
+
+import PostCard from "../PostCard/PostCard.jsx";
 
 function AllPosts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [posts, setPosts ] = useState([]);
 
   useEffect(() => {
     dispatch(startLoading());
@@ -24,7 +28,7 @@ function AllPosts() {
       })
       .then((result) => {
         if (result.success) {
-          console.log(result);
+          setPosts(result.posts);
           dispatch(endLoading());
         } else {
           throw result;
@@ -39,7 +43,13 @@ function AllPosts() {
       });
   }, []);
 
-  return <div>AllPosts</div>;
+  return (<>
+  <ul>
+    {posts && posts.length > 0 && 
+    posts.map((post) => {
+      return <li key={post._id}><PostCard post={post}/> </li>;
+    })}</ul>
+  </>);
 }
 
 export default AllPosts;
