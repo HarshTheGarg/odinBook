@@ -1,5 +1,6 @@
 // Require express and make router
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
 // TODO Enable while deploying
@@ -17,7 +18,7 @@ router.get("/test", (req, res) => {
 
 router.use("/user", require("./user"));
 
-router.use("/post", require("./posts"));
+router.use("/post", passport.authenticate("jwt", {session: false}), require("./posts"));
 
 // TODO Enable while deploying
 /* router.use("*", (req, res) => {

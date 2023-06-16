@@ -18,7 +18,9 @@ function LeftBar() {
   };
 
   const createPost = () => {
-    console.log("Create Post");
+    if (location.pathname != "/post/create") {
+      navigate("/post/create");
+    }
   };
 
   const findFriends = () => {
