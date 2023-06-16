@@ -20,6 +20,7 @@ import { tokenExists } from "./lib/authUtils";
 import { fetchUser } from "./redux/features/currentUser/cuSlice";
 
 import "./sass/main.sass";
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,8 @@ function App() {
             <Route path="/signIn" exact element={<SignIn />} />
 
             <Route path="/protect" exact element={<Protect />} />
+
+            <Route path="/*" exact element={<NotFound />} />
           </>
         )}
         <Route path="/Unauthorized" element={<Unauthorized />} />
