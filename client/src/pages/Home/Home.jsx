@@ -1,5 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { endLoading } from "../../redux/features/loader/loaderSlice.js";
 
 import LeftBar from "../../components/LeftBar/LeftBar.jsx";
 import RightBar from "../../components/RightBar/RightBar.jsx";
@@ -8,6 +10,11 @@ import NavBar from "../../components/Navbar/NavBar.jsx";
 
 function Home() {
   const state = useSelector((state) => state.cu);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(endLoading());
+  }, []);
 
   if (state.isLoggedIn) {
     return (

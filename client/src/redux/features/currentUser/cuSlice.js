@@ -9,7 +9,6 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk("cu/fetchUser", (data, thunkAPI) => {
-  thunkAPI.dispatch(startLoading());
   if (data) {
     return fetch("http://localhost:3000/auth/local/login", {
       method: "POST",
@@ -26,14 +25,13 @@ export const fetchUser = createAsyncThunk("cu/fetchUser", (data, thunkAPI) => {
       })
       .then((result) => {
         setTokenInLocalStorage(result.token, result.expires);
-        thunkAPI.dispatch(endLoading());
         return result;
       })
       .catch((err) => {
-        thunkAPI.dispatch(endLoading());
         throw err;
       });
   } else {
+    thunkAPI.dispatch(startLoading());
     return fetch("http://localhost:3000/user/data", {
       headers: {
         Authorization: localStorage.getItem("token"),
