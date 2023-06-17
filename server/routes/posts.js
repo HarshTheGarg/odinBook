@@ -44,4 +44,21 @@ router.post("/like", async (req, res, next) => {
     });
 });
 
+router.post("/unlike", async (req, res, next) => {
+  const post = await Post.findById(req.body.postId);
+
+  post.likes = post.likes.filter((id) => {
+    return !id.equals(req.user._id);
+  });
+
+  post
+    .save()
+    .then(() => {
+      res.json({ success: true });
+    })
+    .catch((err) => {
+      next(err);
+    });
+})
+
 module.exports = router;
