@@ -33,6 +33,7 @@ router.post("/login", (req, res, next) => {
         // Issue the JWT and respond to the client
         const { token, expires } = issueJWT(user);
         const userDet = {
+          _id: user._id,
           username: user.username,
           email: user.email,
         };

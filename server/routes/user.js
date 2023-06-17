@@ -12,7 +12,7 @@ router.get(
       username: req.user.username,
       email: req.user.email,
     };
-    res.json({ success: true, user: userDet });
+    res.json({ success: true, userDet });
   }
 );
 

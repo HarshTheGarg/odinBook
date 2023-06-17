@@ -12,10 +12,37 @@ function PostCard({ post }) {
   const [liked, setLiked] = useState(false);
 
   const likePost = () => {
+    console.log(state.user);
     if (!liked) {
       setLikes((prevState) => prevState + 1);
       setLiked(true);
       fetch("http://localhost:3000/post/like", {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ postId: post._id }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          if (!result.success) {
+            return result;
+          }
+        })
+        .catch((err) => {
+          if (err.status == 401) {
+            navigate("/Unauthorized");
+          }
+          console.log(err);
+        });
+    } else {
+      setLiked(false);
+      setLikes((prevState) => prevState - 1);
+
+      fetch("http://localhost:3000/post/unlike", {
         method: "POST",
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -43,11 +70,14 @@ function PostCard({ post }) {
   useEffect(() => {
     setLikes(post.likes.length);
 
-    post.likes.forEach((element) => {
-      if (element._id == state.user._id) {
-        setLiked(true);
-      }
-    });
+    if (post.likes && post.likes.length > 0) {
+      post.likes.forEach((element) => {
+        if (element._id == state.user._id) {
+          setLiked(true);
+        }
+      });
+    }
+    
   }, []);
 
   return (

@@ -72,7 +72,7 @@ const cuSlice = createSlice({
     });
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.isLoggedIn = true;
-      state.user = action.payload.user;
+      state.user = action.payload.userDet;
     });
     builder.addCase(fetchUser.rejected, (state, action) => {
       logout();
