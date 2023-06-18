@@ -77,7 +77,7 @@ function PostCard({ post }) {
         }
       });
     }
-    
+
   }, []);
 
   return (
@@ -89,6 +89,8 @@ function PostCard({ post }) {
         <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> {likes}
       </div>
       <div>Comments:</div>
+      <br />
+      <br />
     </>
   );
 }
