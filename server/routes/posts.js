@@ -12,6 +12,7 @@ router.get("/all", async (req, res) => {
     .sort({ dateTime: -1 })
     .populate("author", "email username")
     .populate("likes", "username")
+    .populate("comments")
     .then((result) => {
       res.json({ success: true, posts: result });
     });
@@ -60,5 +61,7 @@ router.post("/unlike", async (req, res, next) => {
       next(err);
     });
 })
+
+router.use("/comment", require("./comment"))
 
 module.exports = router;

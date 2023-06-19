@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Comments from "./Comments/Comments.jsx";
 
 function PostCard({ post }) {
   const state = useSelector((state) => state.cu);
@@ -77,7 +78,6 @@ function PostCard({ post }) {
         }
       });
     }
-
   }, []);
 
   return (
@@ -88,7 +88,7 @@ function PostCard({ post }) {
       <div>
         <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> {likes}
       </div>
-      <div>Comments:</div>
+      <Comments comments={post.comments} postId={post._id}/>
       <br />
       <br />
     </>
