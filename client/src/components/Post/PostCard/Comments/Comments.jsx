@@ -51,8 +51,7 @@ function Comments({ comments, postId }) {
         {commentsList &&
           commentsList.length > 0 &&
           commentsList.map((comment) => {
-            console.log(comment);
-            return <li key={comment._id}>{comment.caption}</li>;
+            return <li key={comment._id}>{comment.caption} - {comment.author.username}</li>;
           })}
       </ul>
       <input
