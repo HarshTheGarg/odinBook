@@ -22,6 +22,7 @@ const strategy = new GitHubStrategy(
           const newUser = new User({
             username: profile.username,
             email: profile.emails[0].value,
+            avatar: profile.photos[0].value
           });
 
           newUser

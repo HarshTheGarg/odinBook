@@ -12,6 +12,7 @@ const strategy = new GoogleStrategy(
     callbackURL: "http://localhost:3000/auth/google/callback",
   },
   function (accessToken, refreshToken, profile, done) {
+    console.log(profile._json.picture);
     User.findOne({ email: profile._json.email })
       .then((user) => {
         if (user) {
@@ -21,6 +22,7 @@ const strategy = new GoogleStrategy(
           const newUser = new User({
             username: profile.displayName,
             email: profile._json.email,
+            avatar: profile._json.picture
           });
 
           newUser
