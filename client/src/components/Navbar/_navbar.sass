@@ -12,23 +12,46 @@ nav
     text-decoration: none
     font-size: 1rem
 
-  ul
+  // ul
+  //   display: flex
+  //   align-items: center
+  //   justify-content: center
+  //   list-style: none
+
+  //   li
+  //     padding: 0 8px
+  //     color: white
+
+
+  //     button
+  //       background-color: gray
+  //       font-size: 1rem
+  //       color: white
+  //       cursor: pointer
+      
+  .userProfile
+    position: relative
     display: flex
+    flex-direction: column
     align-items: center
-    justify-content: center
-    list-style: none
 
-    li
-      padding: 0 8px
-      color: white
+    img
+      border-radius: 50%
+      width: 2em
 
+      &:hover
+        cursor: pointer
+
+    .userpopup
+      position: absolute
+      top: 35px
+      background-color: #dfcccc
+      padding: 5px
+      display: none
 
       button
-        background-color: gray
-        font-size: 1rem
-        color: white
-        cursor: pointer
-      
-      img
-        border-radius: 50%
-        width: 2em
+        background-color: #dfcccc
+
+    &:hover
+      .userpopup
+        display: inline

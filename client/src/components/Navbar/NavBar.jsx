@@ -16,7 +16,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const state = useSelector(state => state.cu);
+  const state = useSelector((state) => state.cu);
 
   const submitLogout = () => {
     dispatch(startLoading());
@@ -34,14 +34,18 @@ function NavBar() {
         <Link className="link" to={"/"}>
           OdinBook
         </Link>
-        <ul>
+        {/* <ul>
           <li>
+          </li>
+        <li> */}
+        <div className="userProfile">
+          <img src={state.user.avatar || profileImage} alt="userProfile" />
+          <div className="userpopup">
             <button onClick={submitLogout}>Logout</button>
-          </li>
-          <li>
-            <img src={state.user.avatar || profileImage} alt="userProfile" />
-          </li>
-        </ul>
+          </div>
+        </div>
+        {/* </li>
+        </ul> */}
       </nav>
     </>
   );
