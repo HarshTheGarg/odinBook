@@ -72,8 +72,8 @@ function PostCard({ post }) {
     setLikes(post.likes.length);
 
     if (post.likes && post.likes.length > 0) {
-      post.likes.forEach((element) => {
-        if (element._id == state.user._id) {
+      post.likes.forEach((liker) => {
+        if (liker._id == state.user._id) {
           setLiked(true);
         }
       });
@@ -83,12 +83,12 @@ function PostCard({ post }) {
   return (
     <>
       <div>
-        {post.caption} - {post.author.username}
+        {post.caption} - {(post.author != null && post.author.username) || "user left"}
       </div>
       <div>
         <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> {likes}
       </div>
-      <Comments comments={post.comments} postId={post._id}/>
+      <Comments comments={post.comments} postId={post._id} />
       <br />
       <br />
     </>

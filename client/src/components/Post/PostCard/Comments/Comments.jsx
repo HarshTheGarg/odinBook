@@ -51,7 +51,7 @@ function Comments({ comments, postId }) {
         {commentsList &&
           commentsList.length > 0 &&
           commentsList.map((comment) => {
-            return <li key={comment._id}>{comment.caption} - {comment.author.username}</li>;
+            return <li key={comment._id}>{comment.caption} - {(comment.author != null && comment.author.username) || "user left"}</li>;
           })}
       </ul>
       <input
