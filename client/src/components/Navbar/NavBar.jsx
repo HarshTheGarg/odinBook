@@ -34,18 +34,14 @@ function NavBar() {
         <Link className="link" to={"/"}>
           OdinBook
         </Link>
-        {/* <ul>
-          <li>
-          </li>
-        <li> */}
         <div className="userProfile">
           <img src={state.user.avatar || profileImage} alt="userProfile" />
-          <div className="userpopup">
-            <button onClick={submitLogout}>Logout</button>
-          </div>
+          <ul className="userpopup">
+            <li>
+              <span onClick={submitLogout}>Logout</span>
+            </li>
+          </ul>
         </div>
-        {/* </li>
-        </ul> */}
       </nav>
     </>
   );
