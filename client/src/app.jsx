@@ -22,6 +22,8 @@ import { fetchUser } from "./redux/features/currentUser/cuSlice";
 import "./sass/main.sass";
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import CreatePost from "./components/Post/Create/CreatePost.jsx";
+import User from "./pages/User/User.jsx";
+import ChangePassword from "./components/ChangePass/ChangePassword.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +50,10 @@ function App() {
               <Route path="post" exact>
                 <Route path="create" element={<CreatePost />}/>
               </Route>
+              <Route path="profile" element={<User />} >
+                <Route path="passwordChange" element={<ChangePassword />} />
+              </Route>
+
             </Route>
 
             <Route path="/friends" exact element={<Home />}>
