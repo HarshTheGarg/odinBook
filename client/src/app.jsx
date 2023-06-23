@@ -24,6 +24,7 @@ import NotFound from "./pages/NotFound/NotFound.jsx";
 import CreatePost from "./components/Post/Create/CreatePost.jsx";
 import User from "./pages/User/User.jsx";
 import ChangePassword from "./components/ChangePass/ChangePassword.jsx";
+import SetPassword from "./components/SetPass/SetPassword.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
               </Route>
               <Route path="profile" element={<User />} >
                 <Route path="passwordChange" element={<ChangePassword />} />
+                <Route path="passwordSet" element={<SetPassword />} />
               </Route>
 
             </Route>

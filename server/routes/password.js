@@ -26,7 +26,15 @@ router.post("/change", async (req, res, next) => {
     next(err);
   });
 
-  res.json({success: true})
+  res.json({ success: true });
+});
+
+router.get("/isSet", (req, res) => {
+  if (req.user.passwordHash) {
+    res.json({ success: true, isSet: true });
+  } else {
+    res.json({ success: true, isSet: false });
+  }
 });
 
 module.exports = router;
