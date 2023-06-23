@@ -14,10 +14,11 @@ require("./config/passport/github");
 // Connect to the DB
 require("./config/mongoConnection");
 
+// To use the .env variables
+require("dotenv").config();
+
 // Code only to be run in development environment
 if (process.env.NODE_ENV == "development") {
-  // To use the .env variables
-  require("dotenv").config();
 
   // Better console output
   const morgan = require("morgan");
