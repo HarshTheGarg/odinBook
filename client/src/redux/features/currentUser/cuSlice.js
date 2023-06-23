@@ -6,6 +6,7 @@ const initialState = {
   isLoggedIn: false,
   user: {},
   error: "",
+  isPassSet: false,
 };
 
 export const fetchUser = createAsyncThunk("cu/fetchUser", (data, thunkAPI) => {
@@ -25,7 +26,7 @@ export const fetchUser = createAsyncThunk("cu/fetchUser", (data, thunkAPI) => {
       })
       .then((result) => {
         setTokenInLocalStorage(result.token, result.expires);
-        return result;
+        return {...result, isPassSet: true};
       })
       .catch((err) => {
         throw err;
@@ -63,6 +64,9 @@ const cuSlice = createSlice({
       logout();
       return initialState;
     },
+    setPassSet: (state, action) => {
+      state.isPassSet = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {
@@ -73,6 +77,7 @@ const cuSlice = createSlice({
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.isLoggedIn = true;
       state.user = action.payload.userDet;
+      state.isPassSet = action.payload.isPassSet;
     });
     builder.addCase(fetchUser.rejected, (state, action) => {
       logout();
@@ -84,4 +89,4 @@ const cuSlice = createSlice({
 });
 
 export default cuSlice.reducer;
-export const { removeUser } = cuSlice.actions;
+export const { removeUser, setPassSet } = cuSlice.actions;

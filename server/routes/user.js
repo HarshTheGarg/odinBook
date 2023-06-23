@@ -11,7 +11,8 @@ router.get("/data", (req, res) => {
     email: req.user.email,
     avatar: req.user.avatar,
   };
-  res.json({ success: true, userDet });
+  const isPassSet = req.user.passwordHash ? true : false;
+  res.json({ success: true, userDet, isPassSet: isPassSet });
 });
 
 router.use("/friends", require("./friends"));

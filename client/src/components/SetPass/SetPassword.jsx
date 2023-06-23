@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPassSet } from "../../redux/features/currentUser/cuSlice";
 
 function SetPassword() {
   const navigate = useNavigate();
   const [newPass, setNewPass] = useState("");
+  
   const newPasswordChange = (e) => {
     setNewPass(e.target.value);
   };
+
+  const dispatch = useDispatch();
 
   const submit = () => {
     fetch("http://localhost:3000/user/password/change", {
@@ -22,6 +27,7 @@ function SetPassword() {
       })
       .then((result) => {
         if (result.success) {
+          dispatch(setPassSet(true));
           navigate("/");
         } else {
           throw result;
