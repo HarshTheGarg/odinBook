@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function RightBar() {
   const state = useSelector((state) => state.cu);
-  console.log(state.isPassSet);
+  
   return (
     <aside className="rightBar">
       <ul>
@@ -14,6 +14,9 @@ function RightBar() {
           ) : (
             <Link to={"/profile/passwordSet"}>Set Password</Link>
           )}
+        </li>
+        <li>
+          <Link to={"/profile/imageChange"} >Change profile image </Link>
         </li>
       </ul>
     </aside>

@@ -4,10 +4,13 @@ const router = express.Router();
 
 const passport = require("passport");
 
-// TODO Enable while deploying
-/* const path = require("path")
+const path = require("path")
+
+/* // TODO Enable while deploying
 router.use(express.static(path.join(__dirname, "../../client/dist/")));
  */
+
+router.use("/public", express.static(path.join(__dirname, "../public")));
 
 // Route to authenticate the users
 router.use("/auth", require("./auth/auth"));
