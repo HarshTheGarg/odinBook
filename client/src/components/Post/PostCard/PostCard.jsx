@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Comments from "./Comments/Comments.jsx";
 
+import Placeholder from "/home/zard/Downloads/download.jpeg";
+
 function PostCard({ post }) {
   const state = useSelector((state) => state.cu);
 
@@ -81,17 +83,18 @@ function PostCard({ post }) {
   }, []);
 
   return (
-    <>
+    <div className="postCard">
       <div>
         {post.caption} - {(post.author != null && post.author.username) || "user left"}
       </div>
+      <img alt="Post Image" className="postImage" src={Placeholder}/>
       <div>
         <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> {likes}
       </div>
       <Comments comments={post.comments} postId={post._id} />
       <br />
       <br />
-    </>
+    </div>
   );
 }
 
