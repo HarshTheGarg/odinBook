@@ -1,4 +1,9 @@
+@use "../../sass/abstracts/_mixins" as mixins
+@use "../../sass/abstracts/_theme" as theme
+
 .mainSection
-  background-color: #dda6c5
-  width: 100%
-  flex: 3
+  @include mixins.themify(theme.$theme)
+  
+    background-color: mixins.themed("color-surface-variant")
+    width: 100%
+    flex: 3
