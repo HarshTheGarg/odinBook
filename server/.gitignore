@@ -2,4 +2,6 @@
 
 */*.pem
 
-/public/userAvatar
+/public/userAvatar/*
+
+/public/posts/*

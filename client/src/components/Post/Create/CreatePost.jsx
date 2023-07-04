@@ -5,6 +5,8 @@ import { endLoading, startLoading } from "../../../redux/features/loader/loaderS
 
 function CreatePost() {
   const [caption, setCaption] = useState("");
+  const [fileData, setFile] = useState();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,13 +18,16 @@ function CreatePost() {
     e.preventDefault();
     dispatch(startLoading());
 
+    let formData = new FormData();
+    formData.append("file", fileData);
+    formData.append("caption", caption);
+
     fetch("http://localhost:3000/post/create", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
-        "content-type": "application/json",
       },
-      body: JSON.stringify({ caption }),
+      body: formData,
     })
       .then((response) => {
         return response.json();
@@ -43,11 +48,38 @@ function CreatePost() {
       });
   };
 
+  /* 
+
+  const onClickHandler = (e) => {
+    e.preventDefault();
+
+
+    fetch("http://localhost:3000/user/uploadAvatar", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+      body: formData,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        dispatch(setAvatar(result.avatarPath));
+      });
+  }; */
+
+  const onFileChange = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
+
   return (
     <>
       <div>CreatePost</div>
       <form>
         <input placeholder="Caption" onChange={changeCaption} />
+        <input type="file" name="postImage" id="postImage" onChange={onFileChange}/>
         <button type="submit" onClick={submitPost}>
           Submit
         </button>
