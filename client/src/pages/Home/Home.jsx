@@ -18,14 +18,14 @@ function Home() {
 
   if (state.isLoggedIn) {
     return (
-      <>
+      <div className="theme-light">
         <NavBar />
         <div className="home">
           <LeftBar />
           <MainSection />
           <RightBar />
         </div>
-      </>
+      </div>
     );
   }
 }
