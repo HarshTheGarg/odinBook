@@ -13,15 +13,15 @@ function AllPosts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [posts, setPosts ] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     dispatch(startLoading());
     fetch("http://localhost:3000/post/all", {
       headers: {
         Authorization: localStorage.getItem("token"),
-        "content-type": "application/json"
-      }
+        "content-type": "application/json",
+      },
     })
       .then((response) => {
         return response.json();
@@ -43,13 +43,21 @@ function AllPosts() {
       });
   }, []);
 
-  return (<>
-  <ul>
-    {posts && posts.length > 0 && 
-    posts.map((post) => {
-      return <li key={post._id}><PostCard post={post}/> </li>;
-    })}</ul>
-  </>);
+  return (
+    <div className="allPosts">
+      <ul>
+        {posts &&
+          posts.length > 0 &&
+          posts.map((post) => {
+            return (
+              <li key={post._id}>
+                <PostCard post={post} />{" "}
+              </li>
+            );
+          })}
+      </ul>
+    </div>
+  );
 }
 
 export default AllPosts;

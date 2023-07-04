@@ -1,0 +1,7 @@
+@use "../../../sass/abstracts/_mixins" as mixins
+@use "../../../sass/abstracts/_theme" as theme
+
+.allPosts
+  @include mixins.themify(theme.$theme)
+    ul
+      list-style: none
