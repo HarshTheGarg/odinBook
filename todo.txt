@@ -1,0 +1,22 @@
+Mongoose data validation
+client side data validation
+
+Redirect to requested page after log in if not logged in and url typed
+
+error handling for error returned from backend (mongo error etc), 500 error
+
+only one like per user
+
+fetch only 3 comments while displaying all posts and fetch all when viewing all
+
+display "you" instead of username, in post/comment author
+
+delete comments
+
+401 handling while local signing in (wrong password or password not set)
+
+show loader only when necessary
+
+user profile image/post image to default if the avatar url returns 404
+
+Enlarge images when clicked
