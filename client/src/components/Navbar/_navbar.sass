@@ -5,11 +5,12 @@ nav
   @include mixins.themify(theme.$theme)
     display: flex
     flex-direction: row
+    justify-content: space-between
+    align-items: center
+
     background-color: mixins.themed("color-surface")
     height: 1.5rem
-    align-items: center
     padding: 2em
-    justify-content: space-between
 
     .link
       color: mixins.themed("color-on-surface")
