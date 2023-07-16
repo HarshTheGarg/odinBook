@@ -29,15 +29,17 @@
           background-color: mixins.themed("color-surface")
           color: mixins.themed("color-on-background")
           border-radius: 7px
+          border: 1px solid rgba(255, 255, 255, 0)
 
           padding-left: 5px
 
           width: 100%
           display: flex
 
-          transition: background-color 200ms ease-in-out
+          transition: all 200ms ease-in-out
 
           &:hover
+            border: 1px solid mixins.themed("color-outline")
             background-color: mixins.themed("color-surface-variant")
 
           span

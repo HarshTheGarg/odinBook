@@ -20,17 +20,20 @@
           color: mixins.themed("color-on-background")
           text-decoration: none
 
+          border: 1px solid rgba(255, 255, 255, 0)
+
           border-radius: 7px
           padding-left: 5px
 
           width: 100%
-          transition: background-color 200ms ease-in-out
+          transition: all 200ms ease-in-out
 
           display: flex
 
           &:hover
             background-color: mixins.themed("color-surface-variant")
-          
+            border: 1px solid mixins.themed("color-outline")
+
           span
             padding: 5px $left-spacing
             text-align: start
