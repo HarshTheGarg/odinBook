@@ -1,3 +1,36 @@
+@use "../../sass/abstracts/_mixins" as mixins
+@use "../../sass/abstracts/_theme" as theme
+
 .rightBar
-  width: 100%
-  flex: 1
+  @include mixins.themify(theme.$theme)
+
+    padding: 0 10px
+    width: 100%
+    flex: 1
+
+    $left-spacing: 15px
+
+    ul
+      list-style: none
+
+      li
+
+        .btnSectionBtn
+          background-color: mixins.themed("color-surface")
+          color: mixins.themed("color-on-background")
+          text-decoration: none
+
+          border-radius: 7px
+          padding-left: 5px
+
+          width: 100%
+          transition: background-color 200ms ease-in-out
+
+          display: flex
+
+          &:hover
+            background-color: mixins.themed("color-surface-variant")
+          
+          span
+            padding: 5px $left-spacing
+            text-align: start

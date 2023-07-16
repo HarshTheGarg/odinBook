@@ -1,22 +1,49 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function RightBar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const state = useSelector((state) => state.cu);
-  
+
+  const changePassword = () => {
+    if (location.pathname != "/profile/passwordChange") {
+      navigate("/profile/passwordChange");
+    }
+  };
+
+  const setPassword = () => {
+    if (location.pathname != "/profile/passwordSet") {
+      navigate("/profile/passwordSet");
+    }
+  };
+
+  const changeProfileImage = () => {
+    if (location.pathname != "/profile/imageChange") {
+      navigate("/profile/imageChange");
+    }
+  };
+
   return (
     <aside className="rightBar">
       <ul>
         <li>
           {state.isPassSet ? (
-            <Link to={"/profile/passwordChange"}>Change Password</Link>
+            <button onClick={changePassword} className="btnSectionBtn">
+              <span>Change Password</span>
+            </button>
           ) : (
-            <Link to={"/profile/passwordSet"}>Set Password</Link>
+            <button onClick={setPassword} className="btnSectionBtn">
+              <span>Set Password</span>
+            </button>
           )}
         </li>
         <li>
-          <Link to={"/profile/imageChange"} >Change profile image </Link>
+          <button onClick={changeProfileImage} className="btnSectionBtn">
+            <span>Change profile image</span>
+          </button>
         </li>
       </ul>
     </aside>
