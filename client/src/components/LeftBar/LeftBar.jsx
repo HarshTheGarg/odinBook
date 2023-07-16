@@ -48,28 +48,39 @@ function LeftBar() {
     <>
       <aside className="leftBar">
         <ul>
-          <li>
-            Posts
+          <li className="btnSectionList">
             <ul>
               <li>
-                <button onClick={allPosts}>All Posts</button>
+                <button onClick={allPosts} className="btnSectionBtn">
+                  <span>All Posts</span>
+                </button>
               </li>
               <li>
-                <button onClick={createPost}>Create Post</button>
+                <button onClick={createPost} className="btnSectionBtn">
+                  <span>Create Post</span>
+                </button>
               </li>
             </ul>
           </li>
-          <li>
-            Friends
+
+          <div className="divider"></div>
+
+          <li className="btnSectionList">
             <ul>
               <li>
-                <button onClick={findFriends}>Find Friends</button>
+                <button onClick={findFriends} className="btnSectionBtn">
+                  <span>Find Friends</span>
+                </button>
               </li>
               <li>
-                <button onClick={friendRequests}>Friend Requests</button>
+                <button onClick={friendRequests} className="btnSectionBtn">
+                  <span>Friend Requests</span>
+                </button>
               </li>
               <li>
-                <button onClick={allFriends}>Friends</button>
+                <button onClick={allFriends} className="btnSectionBtn">
+                  <span>Friends</span>
+                </button>
               </li>
             </ul>
           </li>
