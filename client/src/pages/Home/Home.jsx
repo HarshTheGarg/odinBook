@@ -18,7 +18,7 @@ function Home() {
 
   if (state.isLoggedIn) {
     return (
-      <div className="theme-light">
+      <div className="theme-dark">
         <NavBar />
         <div className="home">
           <LeftBar />
