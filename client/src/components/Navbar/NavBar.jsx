@@ -38,7 +38,7 @@ function NavBar() {
           <img src={state.user.avatar || profileImage} alt="userProfile" />
           <ul className="userpopup">
             <li>
-              <span onClick={submitLogout}>Logout</span>
+              <button onClick={submitLogout}><span>Logout</span></button>
             </li>
           </ul>
         </div>

@@ -13,6 +13,8 @@ nav
     height: 1.5rem
     padding: 2em
 
+    $border-radius: 5px
+
     .link
       color: mixins.themed("color-on-surface")
       text-decoration: none
@@ -26,18 +28,24 @@ nav
 
       img
         border-radius: 50%
-        width: 2em
+        width: 2.5em
 
         &:hover
           cursor: pointer
 
       .userpopup
         position: absolute
+        top: 45px
+
+        width: 15vw
+
         background-color: mixins.themed("color-surface-variant")
+        border: 1px solid mixins.themed("color-outline")
+        border-radius: $border-radius
         padding: 10px
-        top: 40px
-        opacity: 0
         visibility: hidden
+        
+        opacity: 0
         transition: all 0.1s ease-in-out 0.1s
         list-style-type: none
 
@@ -45,8 +53,17 @@ nav
           padding: 2px 5px
           cursor: pointer
 
-        span
-          color: mixins.themed("color-on-surface-variant")
+          button
+            background-color: mixins.themed("color-surface-variant")
+            color: mixins.themed("color-on-surface-variant")
+            border-radius: $border-radius
+            padding: 15px 10px
+            width: 100%
+            transition: background-color 250ms ease-in-out
+            display: flex
+
+            &:hover
+              background-color: mixins.themed("color-surface")
 
       &:hover
         .userpopup
