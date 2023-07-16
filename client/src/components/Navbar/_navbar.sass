@@ -8,6 +8,7 @@ nav
     justify-content: space-between
     align-items: center
 
+    color: mixins.themed("color-on-surface-variant")
     background-color: mixins.themed("color-surface-variant")
     border-bottom: 1px solid mixins.themed("color-outline")
     height: 1.5rem
@@ -58,12 +59,18 @@ nav
             color: mixins.themed("color-on-surface-variant")
             border-radius: $border-radius
             padding: 15px 10px
+            margin-bottom: 2px
             width: 100%
             display: flex
             border: 1px solid rgba(255, 255, 255, 0)
             transition: all 250ms ease-in-out
 
             &:hover
+              border: 1px solid mixins.themed("color-outline")
+              background-color: mixins.themed("color-surface-variant")
+
+        .themeSelector
+          .selected
               border: 1px solid mixins.themed("color-outline")
               background-color: mixins.themed("color-surface-variant")
 
