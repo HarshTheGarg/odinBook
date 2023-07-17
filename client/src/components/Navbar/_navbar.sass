@@ -26,10 +26,11 @@ nav
       display: flex
       flex-direction: column
       align-items: flex-end
+      transition: all 100ms ease-in-out 100ms
 
       img
         border-radius: 50%
-        width: 2.5em
+        width: 2.3em
 
         &:hover
           cursor: pointer
@@ -47,7 +48,7 @@ nav
         visibility: hidden
 
         opacity: 0
-        transition: all 0.1s ease-in-out 0.1s
+        transition: all 100ms ease-in-out 100ms
         list-style-type: none
 
         li
@@ -76,6 +77,7 @@ nav
             background-color: mixins.themed("color-surface-variant")
 
       &:hover
+        transform: scale(1.05)
         .userpopup
           visibility: visible
           opacity: 1

@@ -53,7 +53,14 @@ function NavBar() {
             alt="userProfile"
           />
 
-          <ul className="userpopup">
+          <ul
+            className="userpopup"
+            onMouseLeave={() => {
+              setTimeout(() => {
+                setThemeSelected(false);
+              }, 300);
+            }}
+          >
             {!themeSelected ? (
               <>
                 <li>
