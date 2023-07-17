@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { endLoading } from "../../redux/features/loader/loaderSlice.js";
@@ -12,13 +12,35 @@ function Home() {
   const state = useSelector((state) => state.cu);
   const dispatch = useDispatch();
 
+  const themeState = useSelector((state) => state.theme.theme);
+
+  const [theme, setTheme] = useState(themeState);
+
+  const updateColorScheme = (e) => {
+    if (themeState == "automatic") {
+      setTheme(e.matches ? "dark" : "light");
+    }
+  };
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
   useEffect(() => {
+    if (themeState == "automatic") {
+      mediaQuery.addEventListener("change", updateColorScheme);
+      setTheme(mediaQuery.matches ? "dark" : "light");
+    } else {
+      setTheme(themeState);
+    }
+
     dispatch(endLoading());
-  }, []);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateColorScheme);
+    };
+  }, [themeState]);
 
   if (state.isLoggedIn) {
     return (
-      <div className="theme-dark">
+      <div className={`theme-${theme}`}>
         <NavBar />
         <div className="home">
           <LeftBar />

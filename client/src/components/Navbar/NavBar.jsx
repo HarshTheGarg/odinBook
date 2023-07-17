@@ -11,12 +11,15 @@ import {
 import { logout } from "../../lib/authUtils";
 
 import profileImage from "../../assets/userProfile.jpg";
+import { setTheme } from "../../redux/features/theme/themeSlice";
 
 function NavBar() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.cu);
+  const currentUser = useSelector((state) => state.cu);
+  const theme = useSelector((state) => state.theme.theme);
+
   const [themeSelected, setThemeSelected] = useState(false);
 
   const submitLogout = () => {
@@ -33,6 +36,10 @@ function NavBar() {
     setThemeSelected(!themeSelected);
   };
 
+  const changeTheme = (e) => {
+    dispatch(setTheme(e.target.value));
+  };
+
   return (
     <>
       <nav>
@@ -41,7 +48,10 @@ function NavBar() {
         </Link>
 
         <div className="userProfile">
-          <img src={state.user.avatar || profileImage} alt="userProfile" />
+          <img
+            src={currentUser.user.avatar || profileImage}
+            alt="userProfile"
+          />
 
           <ul className="userpopup">
             {!themeSelected ? (
@@ -60,14 +70,26 @@ function NavBar() {
             ) : (
               <>
                 <li className="themeSelector">
-                  <button className="selected">
-                    <span>Light</span>
+                  <button
+                    className={theme == "light" ? "selected" : undefined}
+                    onClick={changeTheme}
+                    value={"light"}
+                  >
+                    Light
                   </button>
-                  <button>
-                    <span>Dark</span>
+                  <button
+                    onClick={changeTheme}
+                    value={"dark"}
+                    className={theme == "dark" ? "selected" : undefined}
+                  >
+                    Dark
                   </button>
-                  <button>
-                    <span>Automatic</span>
+                  <button
+                    onClick={changeTheme}
+                    value={"automatic"}
+                    className={theme == "automatic" ? "selected" : undefined}
+                  >
+                    Automatic
                   </button>
                 </li>
               </>
