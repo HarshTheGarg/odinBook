@@ -21,6 +21,7 @@ user profile image/post image to default if the avatar url returns 404
 
 Enlarge images when clicked
 
-Image placeholer/loader (see youtube web dev simplified)
+Image placeholer/loader (optimize image loads) (see youtube web dev simplified)
+optimize loads/display placeholder texts
 
 use custom hook for time passed / date fetcher
