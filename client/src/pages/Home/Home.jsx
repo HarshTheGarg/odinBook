@@ -31,12 +31,14 @@ function Home() {
       setTheme(themeState);
     }
 
-    dispatch(endLoading());
-
     return () => {
       mediaQuery.removeEventListener("change", updateColorScheme);
     };
   }, [themeState]);
+
+  useEffect(() => {
+    dispatch(endLoading());
+  }, []);
 
   if (state.isLoggedIn) {
     return (
