@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 router.get("/all", async (req, res) => {
   await Post.find({ author: { $in: [...req.user.friends, req.user._id] } })
     .sort({ dateTime: -1 })
-    .populate("author", "email username")
+    .populate("author", "email username avatar")
     .populate("likes", "username")
     .populate({
       path: "comments",

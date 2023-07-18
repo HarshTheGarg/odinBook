@@ -1,10 +1,50 @@
-.postCard
-  display: flex
-  flex-direction: column
-  padding-bottom: 20px
-  justify-content: center
-  align-items: center
+@use "../../../sass/abstracts/_mixins" as mixins
+@use "../../../sass/abstracts/_theme" as theme
 
-  .postImage
-    width: 80%
-    background: #fff
+.postCard
+  @include mixins.themify(theme.$theme)
+    $widthPercent: 80%
+    display: flex
+    flex-direction: column
+    padding: 15px 0
+    margin-bottom: 20px
+    justify-content: center
+    align-items: center
+
+    background-color: mixins.themed("color-surface-variant")
+    border-radius: 5px
+
+    color: mixins.themed("color-on-surface-variant")
+
+    .author
+      display: flex
+      flex-direction: row
+      justify-content: flex-start
+      align-items: center
+      gap: 10px
+
+      width: $widthPercent
+      margin-bottom: 15px
+
+      .avatar
+        border-radius: 50%
+        width: 2em
+        aspect-ratio: 1
+
+      .authorDetails
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+        .authorName
+          font-weight: 900
+
+        .postTime
+          font-size: 0.8em
+
+    .postImage
+      width: $widthPercent
+      background: #fff
+      aspect-ratio: 1.777
+      object-fit: cover
+      border-radius: 5px
+      border: 2px solid mixins.themed("color-outline")

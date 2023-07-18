@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Comments from "./Comments/Comments.jsx";
 
+import profileImage from "../../../assets/userProfile.jpg";
+
 function PostCard({ post }) {
   const state = useSelector((state) => state.cu);
 
@@ -13,7 +15,6 @@ function PostCard({ post }) {
   const [liked, setLiked] = useState(false);
 
   const likePost = () => {
-    console.log(state.user);
     if (!liked) {
       setLikes((prevState) => prevState + 1);
       setLiked(true);
@@ -82,11 +83,22 @@ function PostCard({ post }) {
 
   return (
     <div className="postCard">
-      <div>
-        {post.caption} - {(post.author != null && post.author.username) || "user left"}
+      <div className="author">
+        <img
+          src={post.author ? post.author.avatar : profileImage}
+          alt="Author avatar"
+          className="avatar"
+        />
+        <div className="authorDetails">
+          <div className="authorName">
+            {(post.author != null && post.author.username) || "user left"}
+          </div>
+          <div className="postTime">{post.dateTime}</div>
+        </div>
       </div>
-      <img alt="Post Image" className="postImage" src={post.postImageUrl}/>
+      <img alt="Post Image" className="postImage" src={post.postImageUrl} />
       <div>
+        {post.caption}
         <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> {likes}
       </div>
       <Comments comments={post.comments} postId={post._id} />
