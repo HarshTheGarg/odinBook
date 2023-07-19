@@ -25,3 +25,5 @@ Image placeholer/loader (optimize image loads) (see youtube web dev simplified)
 optimize loads/display placeholder texts
 
 use custom hook for time passed / date fetcher
+
+change username option
