@@ -138,29 +138,30 @@ function PostCard({ post }) {
 
   return (
     <div className="postCard">
-      <div className="author">
-        <img
-          src={post.author ? post.author.avatar : profileImage}
-          alt="Author avatar"
-          className="avatar"
-        />
-        <div className="authorDetails">
-          <div className="authorName">
-            {(post.author != null && post.author.username) || "user left"}
-          </div>
-          <div className="postTime">
-            {/* new Date(Date.parse(post.dateTime)).toString() */} {timePassed}
+      <div className="aboveImage">
+        <div className="author">
+          <img
+            src={post.author ? post.author.avatar : profileImage}
+            alt="Author avatar"
+            className="avatar"
+          />
+          <div className="authorDetails">
+            <div className="authorName">
+              {(post.author != null && post.author.username) || "user left"}
+            </div>
+            <div className="postTime">{timePassed}</div>
           </div>
         </div>
+        <div className="caption">{post.caption}</div>
       </div>
       <img alt="Post Image" className="postImage" src={post.postImageUrl} />
-      <div>
-        {post.caption}
-        <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> {likes}
+      <div className="afterImage">
+        <div className="likes">
+          <button onClick={likePost}>{liked ? "Liked" : "Like"}</button>
+          <div className="noOfLikes">{likes}</div>
+        </div>
+        <Comments comments={post.comments} postId={post._id} />
       </div>
-      <Comments comments={post.comments} postId={post._id} />
-      <br />
-      <br />
     </div>
   );
 }

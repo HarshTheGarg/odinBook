@@ -16,33 +16,42 @@
 
     color: mixins.themed("color-on-surface-variant")
 
-    .author
-      display: flex
-      flex-direction: row
-      justify-content: flex-start
-      align-items: center
-      gap: 10px
-
+    .aboveImage
       width: $widthPercent
-      margin-bottom: 15px
+      display: flex
+      flex-direction: column
+      margin-bottom: 10px
 
-      .avatar
-        border-radius: 50%
-        width: 2em
-        aspect-ratio: 1
-
-      .authorDetails
+      .author
         display: flex
-        flex-direction: column
-        align-items: flex-start
-        gap: 3px
+        flex-direction: row
+        justify-content: flex-start
+        align-items: center
+        gap: 10px
+        padding-bottom: 10px
 
-        .authorName
-          font-weight: 900
+        width: $widthPercent
 
-        .postTime
-          font-size: 0.6em
-          font-family: 500
+        .avatar
+          border-radius: 50%
+          width: 2em
+          aspect-ratio: 1
+
+        .authorDetails
+          display: flex
+          flex-direction: column
+          align-items: flex-start
+          gap: 3px
+
+          .authorName
+            font-weight: 900
+
+          .postTime
+            font-size: 0.6em
+            font-family: 500
+      
+      .caption
+        width: $widthPercent
 
     .postImage
       width: $widthPercent
@@ -51,3 +60,16 @@
       object-fit: cover
       border-radius: 5px
       border: 2px solid mixins.themed("color-outline")
+      margin-bottom: 10px
+
+    .afterImage
+      width: $widthPercent
+      display: flex
+      flex-direction: column
+      
+      .likes
+        margin-bottom: 10px
+        display: flex
+        justify-content: flex-start
+        align-items: center
+        gap: 5px
