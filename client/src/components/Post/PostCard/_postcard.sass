@@ -47,9 +47,9 @@
             font-weight: 900
 
           .postTime
-            font-size: 0.6em
+            font-size: 0.7em
             font-family: 500
-      
+
       .caption
         width: $widthPercent
 
@@ -66,10 +66,44 @@
       width: $widthPercent
       display: flex
       flex-direction: column
-      
+
       .likes
         margin-bottom: 10px
         display: flex
         justify-content: flex-start
         align-items: center
         gap: 5px
+
+        .FavoriteIcon
+          transform: scale(0.95)
+          fill: none
+          stroke-width: 0.5px
+          stroke: mixins.themed("color-outline")
+          margin-right: 1px
+
+          &:hover
+            cursor: pointer
+
+          &.like
+            animation: favoriteAnim 750ms cubic-bezier(0.84, 0, 0.27, 1) 1 forwards
+
+          &.unlike
+            animation: favoriteAnim 750ms cubic-bezier(0.84, 0, 0.27, 1) 1 reverse forwards
+
+          &.liked
+            fill: red
+
+          @keyframes favoriteAnim
+            0%
+              fill: none
+              transform: scale(0.95)
+            30%
+              transform: scale(0.6)
+            95%
+              transform: scale(1.15)
+              fill: red
+            100%
+              transform: scale(0.95)
+
+        .noOfLikes
+          font-size: 0.8em

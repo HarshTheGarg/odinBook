@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Comments from "./Comments/Comments.jsx";
 
 import profileImage from "../../../assets/userProfile.jpg";
+import Favorite from "@material-design-icons/svg/outlined/favorite.svg";
 
 function PostCard({ post }) {
   const state = useSelector((state) => state.cu);
@@ -13,13 +14,19 @@ function PostCard({ post }) {
 
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [liking, setLiking] = useState(false);
+  const [unliking, setUnliking] = useState(false);
 
   const [timePassed, setTimePassed] = useState("");
 
   const likePost = () => {
     if (!liked) {
+      setLiking(true);
       setLikes((prevState) => prevState + 1);
-      setLiked(true);
+      setTimeout(() => {
+        setLiked(true);
+        setLiking(false);
+      }, 750);
       fetch("http://localhost:3000/post/like", {
         method: "POST",
         headers: {
@@ -43,8 +50,14 @@ function PostCard({ post }) {
           console.log(err);
         });
     } else {
+      setUnliking(true);
       setLiked(false);
+
       setLikes((prevState) => prevState - 1);
+
+      setTimeout(() => {
+        setUnliking(false);
+      }, 750);
 
       fetch("http://localhost:3000/post/unlike", {
         method: "POST",
@@ -157,7 +170,13 @@ function PostCard({ post }) {
       <img alt="Post Image" className="postImage" src={post.postImageUrl} />
       <div className="afterImage">
         <div className="likes">
-          <button onClick={likePost}>{liked ? "Liked" : "Like"}</button>
+          <Favorite
+            className={`FavoriteIcon ${liked ? "liked" : ""} ${
+              liking ? "like" : ""
+            } ${unliking ? "unlike" : ""}`}
+            onClick={likePost}
+          />
+          {/* <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> */}
           <div className="noOfLikes">{likes}</div>
         </div>
         <Comments comments={post.comments} postId={post._id} />
