@@ -36,15 +36,13 @@ function Comments({ comments, postId }) {
         .then((result) => {
           if (result.success) {
             window.location.reload();
-            // setCommentsList(result.comments);
-            // console.log(result.comments);
           } else {
             throw result;
           }
         })
         .catch((err) => {
           console.log(err);
-          // navigate("/Unauthorized");
+          navigate("/Unauthorized");
         });
       setCommentInput("");
     } else {
