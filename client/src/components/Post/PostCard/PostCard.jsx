@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import Comments from "./Comments/Comments.jsx";
 
 import profileImage from "../../../assets/userProfile.jpg";
-import Favorite from "@material-design-icons/svg/outlined/favorite.svg";
+import FavoriteIcon from "@material-design-icons/svg/round/favorite.svg";
+import CommentIcon from "@material-design-icons/svg/round/mode_comment.svg";
 
 function PostCard({ post }) {
   const state = useSelector((state) => state.cu);
@@ -16,6 +17,8 @@ function PostCard({ post }) {
   const [liked, setLiked] = useState(false);
   const [liking, setLiking] = useState(false);
   const [unliking, setUnliking] = useState(false);
+
+  const [showComments, setShowComments] = useState(false);
 
   const [timePassed, setTimePassed] = useState("");
 
@@ -82,6 +85,11 @@ function PostCard({ post }) {
           console.log(err);
         });
     }
+  };
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
+
   };
 
   useEffect(() => {
@@ -170,15 +178,17 @@ function PostCard({ post }) {
       <img alt="Post Image" className="postImage" src={post.postImageUrl} />
       <div className="afterImage">
         <div className="likes">
-          <Favorite
-            className={`FavoriteIcon ${liked ? "liked" : ""} ${
+          <FavoriteIcon
+            className={`svgIcon FavoriteIcon ${liked ? "liked" : ""} ${
               liking ? "like" : ""
             } ${unliking ? "unlike" : ""}`}
             onClick={likePost}
           />
-          {/* <button onClick={likePost}>{liked ? "Liked" : "Like"}</button> */}
           <div className="noOfLikes">{likes}</div>
         </div>
+        <CommentIcon className="svgIcon CommentIcon" onClick={toggleComments}/>
+      </div>
+      <div className={`comments ${showComments ? "show" : null}`}>
         <Comments comments={post.comments} postId={post._id} />
       </div>
     </div>

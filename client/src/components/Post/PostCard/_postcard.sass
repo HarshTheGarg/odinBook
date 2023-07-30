@@ -8,6 +8,7 @@
     flex-direction: column
     padding: 15px 0
     margin-bottom: 20px
+    padding: 30px 0 20px 0
     justify-content: center
     align-items: center
 
@@ -65,20 +66,22 @@
     .afterImage
       width: $widthPercent
       display: flex
-      flex-direction: column
+      justify-content: space-between
+      margin: 10px 0
+
+      .svgIcon
+        transform: scale(0.95)
+        fill: none
+        stroke-width: 0.5px
+        stroke: mixins.themed("color-outline")
 
       .likes
-        margin-bottom: 10px
         display: flex
         justify-content: flex-start
         align-items: center
         gap: 5px
 
         .FavoriteIcon
-          transform: scale(0.95)
-          fill: none
-          stroke-width: 0.5px
-          stroke: mixins.themed("color-outline")
           margin-right: 1px
 
           &:hover
@@ -109,3 +112,21 @@
 
         .noOfLikes
           font-size: 0.8em
+
+      .CommentIcon:hover
+        cursor: pointer
+
+    .comments
+      width: $widthPercent
+
+      max-height: 0
+      transform-origin: top
+
+      overflow: hidden
+      transition: all 500ms ease
+
+      display: flex
+      flex-direction: column
+
+      &.show
+        max-height: 500px
