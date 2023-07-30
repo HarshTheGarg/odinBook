@@ -17,7 +17,7 @@ router.get("/all", async (req, res) => {
     .populate("likes", "username")
     .populate({
       path: "comments",
-      populate: { path: "author", select: "email username" },
+      populate: { path: "author", select: "email username avatar" },
     })
     .then((result) => {
       res.json({ success: true, posts: result });

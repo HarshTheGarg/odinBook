@@ -1,0 +1,69 @@
+@use "../../../../sass/abstracts/_mixins" as mixins
+@use "../../../../sass/abstracts/_theme" as theme
+
+.commentContainer
+  @include mixins.themify(theme.$theme)
+    display: flex
+    flex-direction: column
+    margin-top: 10px
+    overflow: scroll
+
+    .commentsList
+      .comment
+        color: mixins.themed("color-on-surface")
+        margin: 5px 0
+        padding: 10px 0
+        border-bottom: 1px solid mixins.themed("color-outline")
+        display: flex
+        align-items: center
+        gap: 5px
+        justify-content: flex-start
+
+        img
+          width: 5%
+          aspect-ratio: 1
+          border-radius: 50%
+
+        .text
+          .authorName
+            font-size: 0.9rem
+            font-weight: 400
+          .caption
+            font-size: 0.8rem
+            font-weight: 200
+      
+    .newComment
+      display: flex
+      margin: 10px 0
+      width: 100%
+      gap: 5px
+
+      & *
+        border-radius: 5px
+
+      .inputBox
+        flex-grow: 7
+        padding-left: 7px
+        background-color: mixins.themed("color-surface")
+        outline: none
+        border: 1px solid mixins.themed("color-surface")
+        transition: all 250ms ease
+        color: mixins.themed("color-on-surface")
+
+        &:active, &:focus
+          border: 1px solid mixins.themed("color-outline")
+        
+        &::placeholder
+          color: mixins.themed("color-on-surface")
+          opacity: 0.3
+          font-size: 0.9em
+      
+      .submitBtn
+        flex-grow: 1
+        background-color: mixins.themed("color-tertiary-container")
+        border: 1px solid mixins.themed("color-tertiary-container")
+        transition: all 250ms ease
+        color: mixins.themed("color-on-tertiary-container")
+
+        &:hover
+          border: 1px solid mixins.themed("color-tertiary")

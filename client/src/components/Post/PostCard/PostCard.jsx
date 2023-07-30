@@ -18,7 +18,7 @@ function PostCard({ post }) {
   const [liking, setLiking] = useState(false);
   const [unliking, setUnliking] = useState(false);
 
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(true);
 
   const [timePassed, setTimePassed] = useState("");
 
@@ -188,7 +188,7 @@ function PostCard({ post }) {
         </div>
         <CommentIcon className="svgIcon CommentIcon" onClick={toggleComments}/>
       </div>
-      <div className={`comments ${showComments ? "show" : null}`}>
+      <div className={`comments ${showComments ? "show" : undefined}`}>
         <Comments comments={post.comments} postId={post._id} />
       </div>
     </div>
