@@ -95,13 +95,18 @@
 
           &.liked
             fill: red
+            stroke: none
 
           @keyframes favoriteAnim
             0%
               fill: none
               transform: scale(0.95)
+              stroke-width: 0.5px
+              stroke: mixins.themed("color-outline")
             30%
               transform: scale(0.6)
+              stroke: none
+              fill-opacity: 80%
             50%
               fill: red
             95%
@@ -109,12 +114,17 @@
             100%
               transform: scale(0.95)
               fill: red
+              stroke: none
 
         .noOfLikes
           font-size: 0.8em
 
-      .CommentIcon:hover
-        cursor: pointer
+      .CommentIcon
+        transition: all 750ms ease
+        &:hover
+          cursor: pointer
+        &.show
+          stroke-width: 1.5px
 
     .comments
       width: $widthPercent
@@ -129,4 +139,4 @@
       flex-direction: column
 
       &.show
-        max-height: 500px
+        max-height: 300px

@@ -9,3 +9,20 @@
 
 @function themed($key)
   @return map-get($theme-map, $key)
+
+@mixin scrollbars($size, $foreground-color, $background-color)
+
+  &::-webkit-scrollbar
+    width: $size
+    height: $size
+
+  &::-webkit-scrollbar-thumb
+    background: $foreground-color
+    border-radius: 1px
+
+  &::-webkit-scrollbar-track
+    border-radius: 1px
+    background: $background-color
+
+  &::-webkit-scrollbar-corner
+    background: none

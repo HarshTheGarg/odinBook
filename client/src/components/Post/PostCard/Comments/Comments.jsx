@@ -35,13 +35,23 @@ function Comments({ comments, postId }) {
         })
         .then((result) => {
           if (result.success) {
-            window.location.reload();
+            const newComment = {
+              author: {
+                avatar: cu.avatar,
+                email: cu.email,
+                username: cu.username,
+              },
+              caption: commentInput,
+            };
+
+            setCommentsList(commentsList.concat(newComment));
+
+            // window.location.reload();
           } else {
             throw result;
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           navigate("/Unauthorized");
         });
       setCommentInput("");
@@ -53,14 +63,27 @@ function Comments({ comments, postId }) {
   useEffect(() => {
     // Fetch comments
     setCommentsList(comments);
+    console.log(comments);
   }, []);
 
   return (
     <div className="commentContainer">
+      <div className="newComment">
+        <input
+          className="inputBox"
+          type="text"
+          placeholder="Add Comment"
+          onChange={inputChange}
+          value={commentInput}
+        />
+        <button onClick={addComment} className="submitBtn">
+          Submit
+        </button>
+      </div>
       <ul className="commentsList">
         {commentsList &&
           commentsList.length > 0 &&
-          commentsList.map((comment) => {
+          [...commentsList].reverse().map((comment) => {
             return (
               <li key={comment._id} className="comment">
                 <img
@@ -81,18 +104,6 @@ function Comments({ comments, postId }) {
             );
           })}
       </ul>
-      <div className="newComment">
-        <input
-          className="inputBox"
-          type="text"
-          placeholder="Add Comment"
-          onChange={inputChange}
-          value={commentInput}
-        />
-        <button onClick={addComment} className="submitBtn">
-          Submit
-        </button>
-      </div>
     </div>
   );
 }

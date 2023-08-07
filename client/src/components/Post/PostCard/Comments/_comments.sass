@@ -3,10 +3,13 @@
 
 .commentContainer
   @include mixins.themify(theme.$theme)
+    @include mixins.scrollbars(5px, mixins.themed("color-on-secondary") , mixins.themed("color-secondary") )
+
     display: flex
     flex-direction: column
     margin-top: 10px
-    overflow: scroll
+    padding-right: 7px
+    overflow: auto
 
     .commentsList
       .comment
@@ -31,7 +34,7 @@
           .caption
             font-size: 0.8rem
             font-weight: 200
-      
+
     .newComment
       display: flex
       margin: 10px 0
@@ -52,12 +55,12 @@
 
         &:active, &:focus
           border: 1px solid mixins.themed("color-outline")
-        
+
         &::placeholder
           color: mixins.themed("color-on-surface")
           opacity: 0.3
           font-size: 0.9em
-      
+
       .submitBtn
         flex-grow: 1
         background-color: mixins.themed("color-tertiary-container")
