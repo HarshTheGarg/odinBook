@@ -43,12 +43,15 @@ function Home() {
   if (state.isLoggedIn) {
     return (
       <div className={`theme-${theme}`}>
-        <NavBar />
-        <div className="home">
-          <LeftBar />
-          <MainSection />
-          <RightBar />
-        </div>
+
+        <div className="complete">
+          <NavBar />
+          <div className="home">
+            <LeftBar />
+            <MainSection />
+            <RightBar />
+          </div>
+        </div>  
       </div>
     );
   }
