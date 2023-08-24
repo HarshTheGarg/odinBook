@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { endLoading, startLoading } from "../../../redux/features/loader/loaderSlice";
+import {
+  endLoading,
+  startLoading,
+} from "../../../redux/features/loader/loaderSlice";
 
 function CreatePost() {
   const [caption, setCaption] = useState("");
@@ -48,27 +51,6 @@ function CreatePost() {
       });
   };
 
-  /* 
-
-  const onClickHandler = (e) => {
-    e.preventDefault();
-
-
-    fetch("http://localhost:3000/user/uploadAvatar", {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-      body: formData,
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        dispatch(setAvatar(result.avatarPath));
-      });
-  }; */
-
   const onFileChange = (e) => {
     e.preventDefault();
     setFile(e.target.files[0]);
@@ -76,14 +58,23 @@ function CreatePost() {
 
   return (
     <>
-      <div>CreatePost</div>
-      <form>
-        <input placeholder="Caption" onChange={changeCaption} />
-        <input type="file" name="postImage" id="postImage" onChange={onFileChange}/>
-        <button type="submit" onClick={submitPost}>
-          Submit
-        </button>
-      </form>
+      <div className="cpContainer">
+        <div className="header">
+          <span>CreatePost</span>
+        </div>
+        <form>
+          <input placeholder="Caption" onChange={changeCaption} />
+          <input
+            type="file"
+            name="postImage"
+            id="postImage"
+            onChange={onFileChange}
+          />
+          <button type="submit" onClick={submitPost}>
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 }

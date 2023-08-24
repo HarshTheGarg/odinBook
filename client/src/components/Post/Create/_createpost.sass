@@ -1,0 +1,26 @@
+@use "../../../sass/abstracts/_mixins" as mixins
+@use "../../../sass/abstracts/_theme" as theme
+
+.cpContainer
+  @include mixins.themify(theme.$theme)
+    $widthPercent: 80%
+    border-radius: 5px
+    display: flex
+    flex-direction: column
+    margin-bottom: 20px
+    padding: 30px 0 20px 0
+    justify-content: center
+    align-items: center
+
+    color: mixins.themed("color-on-surface-variant")
+    background-color: mixins.themed("color-surface-variant")
+
+    .header
+      display: flex
+      width: $widthPercent
+      margin-bottom: 15px
+    
+    form
+      width: $widthPercent
+      display: flex
+
