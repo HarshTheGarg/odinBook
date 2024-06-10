@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const folderName = `public/userAvatar/${req.user._id}`;
     if (!fs.existsSync(folderName)) {
-      fs.mkdirSync(folderName);
+      fs.mkdirSync(folderName, {recursive: true});
     }
     cb(null, folderName);
   },
