@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../../../redux/features/currentUser/cuSlice";
 
 import GoogleLogin from "../GoogleLogin.jsx";
@@ -15,6 +15,17 @@ function LoginForm() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+
+  const themeState = useSelector((state) => state.theme.theme);
+
+  const [theme, setTheme] = useState(themeState);
+
+  const updateColorScheme = (e) => {
+    if (themeState == "automatic") {
+      setTheme(e.matches ? "dark" : "light");
+    }
+  };
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   function submitLogin(e) {
     e.preventDefault();
@@ -40,8 +51,21 @@ function LoginForm() {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    if (themeState == "automatic") {
+      mediaQuery.addEventListener("change", updateColorScheme);
+      setTheme(mediaQuery.matches ? "dark" : "light");
+    } else {
+      setTheme(themeState);
+    }
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateColorScheme);
+    };
+  }, [themeState]);
+
   return (
-    <>
+    <div className={`theme-${theme}`}>
       <div className="loginForm">
         <form action="">
           <div className="inputs">
@@ -67,7 +91,7 @@ function LoginForm() {
           <GitHubLogin />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
